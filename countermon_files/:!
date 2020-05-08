@@ -1,0 +1,9 @@
+<HTML>
+	<head>
+		<link rel="stylesheet" href="countermon_style.css">
+		</head>
+	<body  onload="create_main_div_tag()" onunload="set_value_to_local_storage()">
+		<h1 align="center" class="sixth">COUNTERMON STATS</h1>
+		<script src="counter_mon_data_assembler.js"></script>
+	</body>
+</HTML>

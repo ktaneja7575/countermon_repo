@@ -417,22 +417,22 @@ function getvalue_func()
 		console.log(timestamp2);
 		var testFolder = './counter_mon_logs/beta/'+start_date;
 
-		if(start_date == end_date)
-		{
-			var files = [testfolder+"/1.json",testfolder+"/2.json",testfolder+"/3.json",testfolder+"/4.json" ]
-			console.log(start_date);
-			console.log(timestamp1);
-			console.log(timestamp2);
-			if(timestamp1>timestamp2)
-			{
-				document.getElementById("demo").innerHTML = "enter a valid range";
-			}
-			else{
-				document.getElementById("demo").innerHTML = "processing data";
-				master_function_display_data_second_page(cloud_name,start_date,regex,counters,files);
-			}
+		// if(start_date == end_date)
+		// {
+		// 	var files = [testfolder+"/1.json",testfolder+"/2.json",testfolder+"/3.json",testfolder+"/4.json" ]
+		// 	console.log(start_date);
+		// 	console.log(timestamp1);
+		// 	console.log(timestamp2);
+		// 	if(timestamp1>timestamp2)
+		// 	{
+		// 		document.getElementById("demo").innerHTML = "enter a valid range";
+		// 	}
+		// 	else{
+		// 		document.getElementById("demo").innerHTML = "processing data";
+		// 		master_function_display_data_second_page(cloud_name,start_date,regex,counters,files);
+		// 	}
 
-		}
+		// }
 		// document.getElementById("demo").innerHTML = timestamp;
 		// new Date().toUTCString();
     master_function_display_data_second_page(cloud_name,start_date,regex,counters, timestamp1, timestamp2);

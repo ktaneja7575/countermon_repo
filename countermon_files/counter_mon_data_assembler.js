@@ -190,7 +190,7 @@ function traverse_gathered_data(data,current_cloud,master_div_element,input_tag_
 	threshold_of_counters=get_threshold_return_array(array_for_counters,data[0]);
 	time_interval_of_couneters=get_time_interval_return_array(array_for_counters,data[0]);
 	var table_element=document.createElement("TABLE");
-	table_element.setAttribute("style","border: 1px solid black;border-collapse: collapse;");
+	table_element.setAttribute("style","border: 1px solid black;border-collapse: collapse;" );
 	var table_row1=document.createElement("tr");
 	table_row1.setAttribute("style","border: 1px solid black;border-collapse: collapse;");
 	var table_heading=document.createElement("th");
@@ -226,7 +226,7 @@ function traverse_gathered_data(data,current_cloud,master_div_element,input_tag_
 		{
 			value_sum=value_sum+parseInt(object_getter[array_for_counters[indexer2]]);
 			td_tag=document.createElement("td");
-			td_tag.setAttribute("style","border: 1px solid black;border-collapse: collapse;text-align: center;");
+			td_tag.setAttribute("style","border: 1px solid black;border-collapse: collapse;");
 			var temp_array=new Array();
 			temp_array=object_getter[array_for_counters[indexer2]].split("-");
 			text=document.createTextNode(temp_array[0]);
@@ -258,8 +258,10 @@ function master_function_display_data_second_page(for_date,input_tag_text,final_
 	cloud_template.appendChild(cloud_template_text);
 	temp_div.appendChild(cloud_template);
 	var file_name="./counter_mon_logs/"+display_data_for_cloud+"/countermon_json_file_"+for_date+"_cloud_"+display_data_for_cloud+".json";
+	alert(file_name);
 	create_master_table_for_passed_cloud(display_data_for_cloud,temp_div,file_name,input_tag_text,final_counter_array);
 	master_div_element.appendChild(temp_div);
+
 
 }
 function empty_calender(which)

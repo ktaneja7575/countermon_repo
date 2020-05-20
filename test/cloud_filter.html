@@ -1,0 +1,374 @@
+<html>
+	<head>
+
+
+		<style>
+			 * {
+  box-sizing: border-box;}
+
+:root {
+  --select-theme: #ffe3de;
+  --select-theme-hover: #d18375;
+  --option-color: #0d323b;
+}
+
+.container1 {
+	box-sizing: border-box;
+  background: #fff;
+  margin: 50px auto;
+  padding: 40px;
+  width: 900px;
+  border: 1px solid lightgrey;
+}
+
+/* // --- actual thing */
+.inline-radio {
+	display: flex;
+  border-radius: 3px;
+	/* // overflow: hidden; */
+  border: 1px solid #BDBDBD;
+}
+
+ label {
+    width: 100%;
+		height: 35px;
+    /* // color: $color-text; */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-right: 1px solid #BDBDBD;
+  }
+  
+  .inline-radio input {
+    position: absolute;
+    left: -9999px;
+	}
+  
+  input:focus + label,
+  label:hover,
+  label:focus {
+    background: lightgrey;
+  }
+
+	label:last-child {
+		border-right: 0;
+	}
+
+	input:checked + label {
+		background: rgb(175, 200, 247);
+		color: #FFF;
+	}
+  
+
+
+  #select_cloud{
+    font-family:raleway;
+    font-size:20px;
+    text-align: center;
+    margin-top: -25px;
+    padding: 10px;
+  }
+
+  #fname{
+  width: 100%;
+  padding: 12px 20px;
+  /* margin: 8px 0; */
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #BDBDBD;
+}
+
+#regex{
+	/* background-color: brown; */
+	background: #fff;
+  margin: 50px auto;
+  padding: 40px;
+  width: 900px;
+  border: 1px solid lightgrey;
+}
+
+
+
+/* .container2 {
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container__title {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 16px;
+  text-align: center;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectbox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 700px;
+}
+.option-container {
+  background-color: var(--select-theme);
+  color: var(--option-color);
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.selectbox--active .option-container {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.selectbox__displayWord,
+.option-container__option {
+  padding: 12px 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.selectbox__displayWord {
+  position: relative;
+  background-color: var(--select-theme);
+  color: var(--option-color);
+  border-radius: 8px;
+  height: 40px;
+}
+.selectbox__displayWord::after {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  content: "";
+  background: url("https://image.flaticon.com/icons/svg/271/271210.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  height: 16px;
+  width: 16px;
+  color: #f5f6fa;
+  transform: translateY(-50%);
+  transition: all 0.4s;
+}
+.selectbox--active .selectbox__displayWord::after {
+  transform: translateY(-50%) rotateZ(180deg);
+}
+.selectbox--unselect .selectbox__displayWord {
+  color: gray;
+}
+.selectbox--shake {
+  animation: shake 0.3s forwards;
+}
+.option-container {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
+.option-container__option:hover {
+  background-color: var(--select-theme-hover);
+}
+.option__radio {
+  display: none;
+}
+.option__label {
+  cursor: pointer;
+}
+
+.form__submit-button {
+  height: 40px;
+  padding: 12px;
+  outline: 0;
+  border: none;
+  border-radius: 8px;
+  margin-left: 20px;
+  background-color: rgb(187, 67, 59);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.form__submit-button:hover {
+  background-color: rgb(255, 252, 241);
+  color: black;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+} */
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+		<!-- <link rel="stylesheet" href="countermon_style_table2.css"> -->
+		<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+    <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+    <link rel="stylesheet" href="counter.css"> 
+		</head>
+         <body>
+	<!-- <body onload="master_function_display_data_second_page()" > -->
+		<!-- <div style="height:500px;width:100%;border:2px solid white;">
+
+		<div id="division_for_calender_start" style="margin-left:40px;"></div>
+		<div id="division_for_calender_end" style="margin-left:500px;"></div>
+		<div id="selector_div" style="height:400px;width:500px;margin-left:980px;"> </div>
+		</div> -->
+		<form>
+
+
+
+
+			<div class="container1">
+				<div id="select_cloud"><b>Select Cloud</b></div>
+	  
+				<div class="inline-radio">
+					<input type="radio" name="cloud_name" id="beta" value="beta">
+					<label for="beta">beta</label>
+				  
+					<input type="radio" name="cloud_name" id="zs1" value="zs1">
+					<label for="zs1">zs1</label>
+			  
+					<input type="radio" name="cloud_name" id="zs2" value="zs2">
+					<label for="zs2">zs2</label>
+			  
+					<input type="radio" name="cloud_name" id="zs3" value="zs3">
+					<label for="zs3">zs3</label>
+			  
+					<input type="radio" name="cloud_name" id="zsnet" value="zsnet">
+					<label for="zsnet">zsnet</label>
+			  
+					<input type="radio" name="cloud_name" id="zsc" value="zsc">
+					<label for="zsc">zsc</label>
+				</div>
+			  </div>
+			  <div id="regex">
+				<div id="select_cloud"><b>Enter Regex</b></div>
+                <input type="text" id="fname" name="fname">
+			  </div>
+
+
+			  <div>
+				<input id="datepicker" type="text" name="datep" value="">
+			  </div>
+
+
+
+
+
+			  <!-- <div class="container2">
+				<form class="form">
+				  <div class="selectbox selectbox--unselect" data-option="">
+					<div class="selectbox__displayWord">
+					  -- Select --
+					</div>
+					<div class="option-container">
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1100" name="category">
+						<label class="option__label" for="1100" data-value="11:00">11:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1200" name="category">
+						<label class="option__label" for="1200" data-value="12:00">12:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1300" name="category">
+						<label class="option__label" for="1300" data-value="13:00">13:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1400" name="category">
+						<label class="option__label" for="1400" data-value="14:00">14:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1500" name="category">
+						<label class="option__label" for="1500" data-value="15:00">15:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1600" name="category">
+						<label class="option__label" for="1600" data-value="16:00">16:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1700" name="category">
+						<label class="option__label" for="1700" data-value="17:00">17:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1800" nme="category">
+						<label class="option__label" for="1800" data-value="18:00">18:00</label>
+					  </div>
+					  <div class="option-container__option">
+						<input type="radio" class="option__radio" id="1900" name="category">
+						<label class="option__label" for="1900" data-value="19:00">19:00</label>
+					  </div>
+					</div>
+				  </div>
+				  <button class="form__submit-button" type="button">Submit</button>
+				</form>
+			  </div> -->
+        <div class="container2">
+          <select id="counter" multiple data-multi-select-plugin>
+              <option name="drop" value="Volvo">Volvo</option>
+              <option name="drop" value="Mercedes">Mercedes</option>
+              <option name="drop" value="Hilux">Hilux</option>
+              <option name="drop" value="Corsa">Corsa</option>
+              <option name="drop" value="BMW">BMW</option>
+              <option name="drop" value="Ferrari">Ferrari</option>
+          </select>
+        </div>
+
+
+
+
+
+				
+			
+			<INPUT TYPE="button" NAME="process" VALUE="Process Request..." onClick="master_function_display_data_second_page()">
+		</form>
+		
+		<h1 style="text-align:center;background-color:white;color:black;">
+                                        REPORT WILL BE GENERATED HERE:-
+                                        </h1>
+			<div id="div_to_display_searched_contents" style="margin-top:50px;">
+			</div>
+		<script src="counter_mon_data_assembler.js"></script>
+    <!-- <script src="picker.js"></script> -->
+    <script src="final.js"></script>
+		</body>
+	</html>

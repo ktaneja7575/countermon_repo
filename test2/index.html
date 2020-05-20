@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="counter.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<link rel="stylesheet" href="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.min.css">
+<script src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/js/bootstrap-datetimepicker.min.js"></script>
+<!-- <script src="http://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
+  </head>
+<body>
+  <div class="container_nav">
+    <div class="logo">
+      <img src="./images/zslogo1.png" alt="" width="140"/>
+      </div>
+    <nav>
+      <ul>
+      <li>Countermon Dashboard</li>
+      </ul>
+      </nav>
+</div>
+  <div style="
+      margin: 20px auto;
+      padding: 30px;
+      width: 80%;">
+<div class="col-sm-3">
+  <div class="form-group">
+    <label for="Cloud_name">Select Cloud:</label>
+    <select class="form-control" id="cloud_name">
+      <option value="beta">beta</option>
+      <option value="zs1">zs1</option>
+      <option value="zs2">zs2</option>
+      <option value="zs3">zs3</option>
+      <option value="zsnet">zsnet</option>
+      <option value="zsc">zsc</option>
+    </select>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class="form-group">
+    <label for="Start_date">Start Date:</label>
+      <div class='input-group date' id='datetimepicker1'>
+          <input type='text' id="dp1" class="form-control">
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class="form-group">
+    <label for="sel1">End Date:</label>
+      <div class='input-group date' id='datetimepicker2'>
+          <input type='text' id="dp2" class="form-control"/>
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class="form-group">
+    <label for="sel1">Enter Node/DC:</label>
+          <input type='text' id="regex_name" class="form-control" placeholder="Enter Node/DC"/>
+  </div>
+</div>
+</div>
+    <div style="margin: 20px auto;
+    padding: 30px;
+    width: 80%;">
+      <div class="col-sm-1"><label for="name">Select Counter:</label></div>
+     <div class="col-sm-10">
+     <select id="counter"  multiple data-multi-select-plugin>
+      <option value="http_tot_request_header_bytes_received">http_tot_request_header_bytes_received</option>
+      <option value="http_tot_request_received">http_tot_request_received</option>
+      <option value="http_tot_transaction_complete">http_tot_transaction_complete</option>
+      <option value="http_tot_request_bytes_received">http_tot_request_bytes_received</option>
+      <option value="http_tot_all_responses">http_tot_all_responses</option>
+      <option value="http_tot_Gets">http_tot_Gets</option>
+      <option value="http_tot_request_header_partial_chunks">http_tot_request_header_partial_chunks</option>
+      <option value="http_tot_Connects">http_tot_Connects</option>
+    </select>
+  </div>
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-primary" style="margin-left: -20px !important;" onclick="getvalue_func()">Proceed</button>
+    </div>
+  </div>
+  <p id="demo"></p>
+<div id="div_to_display_searched_contents" style="margin-top:50px;"></div>
+<script src="picker.js"></script>
+<!-- <script src="final.js"></script> -->
+<script src="counter_mon_data_assembler.js"></script>
+<!-- <script src="newj.js"></script> -->
+</body>
+</html>

@@ -52,7 +52,8 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
     for (var j = 0; j < instances_array.length; j++) {
         var object_getter = get_object_corresponding_to_instance(data, instances_array[j]);
         if (instances_array[j] in final_hash) {
-            console.log("alread exist instance");;
+            console.log("alread exist instance");
+            var objx = final_hash[instances_array[j]];
         }
         else {
             final_hash[instances_array[j]] = {};
@@ -71,10 +72,13 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
                         inst_count_time_val++;
                     }
                 }
-                if (final_hash[instances_array[j]][counters[k]] in final_hash) {
+                // console.log(objx);
+                if (counters[k] in final_hash[instances_array[j]]) {
+                    console.log("you are in counter");
                     final_hash[instances_array[j]][counters[k]] = final_hash[instances_array[j]][counters[k]] + inst_count_time_val;
                 }
                 else {
+                    
                     final_hash[instances_array[j]][counters[k]] = inst_count_time_val;
                 }
                 if (counters[k] in hash_thres) {
@@ -93,7 +97,6 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 
         }
     }
-  
 
 
 }
@@ -179,7 +182,6 @@ function show_table(final_counter_array) {
     document.getElementById("div_to_display_searched_contents").appendChild(table_element);
 }
 
-
 function getvalue_func() {
     var cloud_name = document.getElementById('cloud_name').value;
     var origi_date1 = document.getElementById('dp1').value;
@@ -207,14 +209,12 @@ function getvalue_func() {
         console.log("Please enter correct range");
     }
     // Code for one file
-    var files_array = ["./counter_mon_logs/countermon_json_file_17-05-20_cloud_beta.json"];
+    var files_array = ["./counter_mon_logs/countermon_json_file_17-05-20_cloud_beta.json","./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"];
+    // ,"./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"
     var t1 = epoch1;
     var t2 = epoch2;
-    var z = fetch_data_between_time_range(regex, counters, files_array,t1, t2);
-    sleep(3000);
-    if(z == 0){
-        show_table(counters);
-    }
+    fetch_data_between_time_range(regex, counters, files_array,t1, t2);
+    
     
 
     // else {
@@ -247,8 +247,7 @@ function getvalue_func() {
     //         // fetch_data_between_time_range(regex, counters, files_array,t1, t2);
     //     }
     // }
-    
-
+    show_table(counters);
 }
 
 

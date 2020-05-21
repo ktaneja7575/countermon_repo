@@ -1,4 +1,4 @@
-var final_hash = {};
+
 var hash_thres = {};
 var hash_interv = {};
 function gmt_date(gmt) {
@@ -46,7 +46,7 @@ function get_object_corresponding_to_instance(data, instance) {
         }
     }
 }
-function traverse_data_for_one_file(regex, counters, data, t1, t2) {
+function traverse_data_for_one_file(regex, counters, data, t1, t2, final_hash) {
     var instances_array = new Array();
     instances_array = get_instances_return_array(data, regex);
     for (var j = 0; j < instances_array.length; j++) {
@@ -97,6 +97,7 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 
         }
     }
+    return final_hash;
     console.log(final_hash);
 // show_table(counters);
 }
@@ -104,9 +105,10 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 function Data_for_last_cron(data) {
     document.getElementById("demo").innerHTML = "now u can analyse data till last crone time";
 }
-function fetch_data_between_time_range(regex, counters, files_array, t1, t2) {
-    for (var i = 0; i < files_array.length; i++) {
-        fetch(files_array[i])
+function fetch_data_between_time_range(regex, counters, files_array, t1, t2, s, final_hash) {
+    var p;
+    if(s<files_array.length){
+        fetch(files_array[s])
             .then(function (resp) {
                 if (resp.status === 404) {
                     return 0;
@@ -118,17 +120,19 @@ function fetch_data_between_time_range(regex, counters, files_array, t1, t2) {
                     Data_for_last_cron(data);
                 }
                 else {
-                    traverse_data_for_one_file(regex, counters, data, t1, t2);
+                   p = traverse_data_for_one_file(regex, counters, data, t1, t2, final_hash);
                 }
 
             });
-    }
+            fetch_data_between_time_range(regex, counters, files_array, t1, t2, s+1, p);
+        }
+            return p;
 }
 
 
 
 
-function show_table(final_counter_array) {
+function show_table(final_counter_array, final_hash) {
     var table_element = document.createElement("TABLE");
     table_element.setAttribute("style", "border: 1px solid black; border-collapse: collapse; margin-left:auto;margin-right:auto; padding:50px;");
     var table_row1 = document.createElement("tr");
@@ -215,8 +219,10 @@ function getvalue_func() {
     // ,"./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"
     var t1 = epoch1;
     var t2 = epoch2;
-    fetch_data_between_time_range(regex, counters, files_array,t1, t2);
-
+    var s = 0;
+    var final_hash = {};
+    var s = fetch_data_between_time_range(regex, counters, files_array,t1, t2, s, final_hash);
+    show_table(counters, s);
 
     
 

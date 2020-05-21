@@ -1,4 +1,3 @@
-var final_hash = {};
 var hash_thres = {};
 var hash_interv = {};
 function gmt_date(gmt) {
@@ -47,17 +46,19 @@ function get_object_corresponding_to_instance(data, instance) {
     }
 }
 function traverse_data_for_one_file(regex, counters, data, t1, t2) {
+    var final_hash = new Object();
     var instances_array = new Array();
     instances_array = get_instances_return_array(data, regex);
     for (var j = 0; j < instances_array.length; j++) {
         var object_getter = get_object_corresponding_to_instance(data, instances_array[j]);
-        if (instances_array[j] in final_hash) {
-            console.log("alread exist instance");
-            var objx = final_hash[instances_array[j]];
-        }
-        else {
-            final_hash[instances_array[j]] = {};
-        }
+        // if (instances_array[j] in final_hash) {
+        //     console.log("alread exist instance");
+        //     var objx = final_hash[instances_array[j]];
+        // }
+        // else {
+        //     final_hash[instances_array[j]] = {};
+        // }
+        final_hash[instances_array[j]] = {};
         if ("NO_DATA_FOUND" in object_getter) {
             console.log("no data found");
         }
@@ -73,14 +74,15 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
                     }
                 }
                 // console.log(objx);
-                if (counters[k] in final_hash[instances_array[j]]) {
-                    console.log("you are in counter");
-                    final_hash[instances_array[j]][counters[k]] = final_hash[instances_array[j]][counters[k]] + inst_count_time_val;
-                }
-                else {
+                // if (counters[k] in final_hash[instances_array[j]]) {
+                //     console.log("you are in counter");
+                //     final_hash[instances_array[j]][counters[k]] = final_hash[instances_array[j]][counters[k]] + inst_count_time_val;
+                // }
+                // else {
                     
-                    final_hash[instances_array[j]][counters[k]] = inst_count_time_val;
-                }
+                //     final_hash[instances_array[j]][counters[k]] = inst_count_time_val;
+                // }
+                final_hash[instances_array[j]][counters[k]] = inst_count_time_val;
                 if (counters[k] in hash_thres) {
                     console.log("thrashold for this counter already exists");
                 }
@@ -97,14 +99,17 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 
         }
     }
-    console.log(final_hash);
+    // console.log(final_hash);
+    return final_hash;
 // show_table(counters);
 }
 
 function Data_for_last_cron(data) {
     document.getElementById("demo").innerHTML = "now u can analyse data till last crone time";
 }
-function fetch_data_between_time_range(regex, counters, files_array, t1, t2) {
+function fetch_data_between_time_range(regex, counters, files_array, t1, t2, arr) {
+    var abc = [];
+    alert(typeof(abc));
     for (var i = 0; i < files_array.length; i++) {
         fetch(files_array[i])
             .then(function (resp) {
@@ -118,70 +123,97 @@ function fetch_data_between_time_range(regex, counters, files_array, t1, t2) {
                     Data_for_last_cron(data);
                 }
                 else {
-                    traverse_data_for_one_file(regex, counters, data, t1, t2);
+                abc[i] = new Object();
+                abc[i] = traverse_data_for_one_file(regex, counters, data, t1, t2);
+                // alert(Object.keys(p)[0]);
+                // abc.push(p);
+                // alert(typeof(abc));
                 }
 
             });
     }
+    alert(abc.length);
+    // alert(Object.keys(arr).length);
+    // return arr;
 }
 
 
 
 
-function show_table(final_counter_array) {
-    var table_element = document.createElement("TABLE");
-    table_element.setAttribute("style", "border: 1px solid black; border-collapse: collapse; margin-left:auto;margin-right:auto; padding:50px;");
-    var table_row1 = document.createElement("tr");
-    table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse;  padding:15px; background-color:rgb(175, 200, 247)");
-    var table_heading = document.createElement("th");
-    table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:15px; ");
-    var text = document.createTextNode("INSTANCE NAME");
-    table_heading.appendChild(text);
-    table_row1.appendChild(table_heading);
-    table_element.appendChild(table_row1);
-    for (var p = 0; p < final_counter_array.length; p++) {
-        table_heading = document.createElement("th");
-        table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:15px");
-        text = document.createTextNode(final_counter_array[p] + " thrs:" + hash_thres[final_counter_array[p]] + " time-interval:" + hash_interv[final_counter_array[p]]);
-        table_heading.appendChild(text);
-        table_row1.appendChild(table_heading);
-        table_element.appendChild(table_row1);
-    }
+function show_table(final_counter_array, final_arr) {
+    console.log(final_counter_array);
+    console.log(final_arr);
+    var final_hash = {};
+    console.log(final_hash);
+    console.log(final_arr.length);
+    // for(var i=0;i<final_arr.length; i++){
+    //     var obj = final_arr[i];
+    //     console.log(final_arr.length);
+    // }
+    //     for(var j=0; j< Object.keys(obj).length; j++){
+    //         if(Object.keys(obj)[j] in final_hash){
+    //             var obj2 = final_hash[Object.keys(obj)[j]];
+    //         }
+    //         else{
+    //             final_hash[Object.keys(obj)[j]] = {};
 
-    for (var i = 0; i < Object.keys(final_hash).length; i++) {
-        // document.write(Object.keys(final_hash)[i]);
-        var x = Object.values(final_hash)[i];
-        table_row1 = document.createElement("tr");
-        table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:15px");
-        var table_data = document.createElement("td");
-        // table_data.classList.add("mystyle");
-        table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:15px");
-        text = document.createTextNode(Object.keys(final_hash)[i]);
-        table_data.appendChild(text);
-        table_row1.appendChild(table_data);
-        // table_element.appendChild(table_row1);
-        for (var p = 0; p < final_counter_array.length; p++) {
-            table_data = document.createElement("td");
-            // table_data.classList.add("mystyle");
-            table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; text-align:center;");
-            text = document.createTextNode(x[final_counter_array[p]]);
-            table_data.appendChild(text);
-            table_row1.appendChild(table_data);
+    //         }
+    //     }
+    
 
-            // document.write(x[final_counter_array[p]]);
+    // var table_element = document.createElement("TABLE");
+    // table_element.setAttribute("style", "border: 1px solid black; border-collapse: collapse; margin-left:auto;margin-right:auto; padding:50px;");
+    // var table_row1 = document.createElement("tr");
+    // table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse;  padding:15px; background-color:rgb(175, 200, 247)");
+    // var table_heading = document.createElement("th");
+    // table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:15px; ");
+    // var text = document.createTextNode("INSTANCE NAME");
+    // table_heading.appendChild(text);
+    // table_row1.appendChild(table_heading);
+    // table_element.appendChild(table_row1);
+    // for (var p = 0; p < final_counter_array.length; p++) {
+    //     table_heading = document.createElement("th");
+    //     table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:15px");
+    //     text = document.createTextNode(final_counter_array[p] + " thrs:" + hash_thres[final_counter_array[p]] + " time-interval:" + hash_interv[final_counter_array[p]]);
+    //     table_heading.appendChild(text);
+    //     table_row1.appendChild(table_heading);
+    //     table_element.appendChild(table_row1);
+    // }
 
-        }
-        // document.write(Object.keys(x).length);
-        // var len1 = Object.keys(x).length;
-        // for(var j=0; j< len1; j++)
-        // {
-        // 	document.write(Object.keys(x)[j]);
-        // document.write(Object.values(x)[j]);
-        // }
-        table_element.appendChild(table_row1);
+    // for (var i = 0; i < Object.keys(final_hash).length; i++) {
+    //     // document.write(Object.keys(final_hash)[i]);
+    //     var x = Object.values(final_hash)[i];
+    //     table_row1 = document.createElement("tr");
+    //     table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:15px");
+    //     var table_data = document.createElement("td");
+    //     // table_data.classList.add("mystyle");
+    //     table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:15px");
+    //     text = document.createTextNode(Object.keys(final_hash)[i]);
+    //     table_data.appendChild(text);
+    //     table_row1.appendChild(table_data);
+    //     // table_element.appendChild(table_row1);
+    //     for (var p = 0; p < final_counter_array.length; p++) {
+    //         table_data = document.createElement("td");
+    //         // table_data.classList.add("mystyle");
+    //         table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; text-align:center;");
+    //         text = document.createTextNode(x[final_counter_array[p]]);
+    //         table_data.appendChild(text);
+    //         table_row1.appendChild(table_data);
 
-    }
-    document.getElementById("div_to_display_searched_contents").appendChild(table_element);
+    //         // document.write(x[final_counter_array[p]]);
+
+    //     }
+    //     // document.write(Object.keys(x).length);
+    //     // var len1 = Object.keys(x).length;
+    //     // for(var j=0; j< len1; j++)
+    //     // {
+    //     // 	document.write(Object.keys(x)[j]);
+    //     // document.write(Object.values(x)[j]);
+    //     // }
+    //     table_element.appendChild(table_row1);
+
+    // }
+    // document.getElementById("div_to_display_searched_contents").appendChild(table_element);
 }
 
 function getvalue_func() {
@@ -197,7 +229,7 @@ function getvalue_func() {
     var gmt_start_date = gmt_date(gmt1);
     var gmt_end_date = gmt_date(gmt2);
     // console.log(origi_date1, origi_date2, date1, date2, gmt1, gmt2, epoch1, epoch2);
-    console.log(gmt1, gmt2, gmt_start_date, gmt_end_date);
+    // console.log(gmt1, gmt2, gmt_start_date, gmt_end_date);
     var regex = document.getElementById('regex_name').value;
     var counters = [];
     var x = document.getElementById("counter");
@@ -215,9 +247,12 @@ function getvalue_func() {
     // ,"./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"
     var t1 = epoch1;
     var t2 = epoch2;
-    fetch_data_between_time_range(regex, counters, files_array,t1, t2);
+    var arr = new Array();
+    var k = fetch_data_between_time_range(regex, counters, files_array,t1, t2, arr);
+    console.log(k);
+    // alert(k);
 
-
+    show_table(counters,k);
     
 
     // else {

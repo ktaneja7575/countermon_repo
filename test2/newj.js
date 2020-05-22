@@ -104,31 +104,53 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 function Data_for_last_cron(data) {
     document.getElementById("demo").innerHTML = "now u can analyse data till last crone time";
 }
-function fetch_data_between_time_range(regex, counters, files_array, t1, t2) {
-    for (var i = 0; i < files_array.length; i++) {
-        fetch(files_array[i])
-            .then(function (resp) {
-                if (resp.status === 404) {
-                    return 0;
-                }
-                return resp.json();
-            })
-            .then(function (data) {
-                if (data == 0) {
-                    Data_for_last_cron(data);
-                }
-                else {
-                    traverse_data_for_one_file(regex, counters, data, t1, t2);
-                }
+function fetch_data_between_time_range(regex, counters, file_getter, t1, t2) {
 
-            });
-    }
+
+
+	let data_file=fetch(file_getter);
+	Promise.all([data_file])
+	.then( files => {files.forEach(file => { process(file.json());
+	})
+	})
+	.catch (err=>{
+	});
+	let process = (prom) => {
+		prom.then(data=>{
+			traverse_data_for_one_file(regex, counters, data, t1, t2);
+			show_table(counters);
+		})
+	}
+
+         //fetch(file)
+          //  .then(function (resp) {
+            //    if (resp.status === 404) {
+              //      return 0;
+                //}
+               // return resp.json();
+            //})
+            //.then(function (data) {
+              //  if (data == 0) {
+                //    Data_for_last_cron(data);
+                //}
+                //else {
+                  //  traverse_data_for_one_file(regex, counters, data, t1, t2);
+                //}
+
+            //});
+}
+
+function traverse_files(regex, counters, files_array, t1, t2)
+{
+	for (var i = 0; i < files_array.length; i++) 
+	{
+		fetch_data_between_time_range(regex, counters, files_array[i], t1, t2);
+	}
 }
 
 
-
-
 function show_table(final_counter_array) {
+	document.getElementById("div_to_display_searched_contents").innerHTML="";
     var table_element = document.createElement("TABLE");
     table_element.setAttribute("style", "border: 1px solid black; border-collapse: collapse; margin-left:auto;margin-right:auto; padding:50px;");
     var table_row1 = document.createElement("tr");
@@ -215,7 +237,7 @@ function getvalue_func() {
     // ,"./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"
     var t1 = epoch1;
     var t2 = epoch2;
-    fetch_data_between_time_range(regex, counters, files_array,t1, t2);
+    traverse_files(regex, counters, files_array,t1, t2);
 
 
     
@@ -250,7 +272,6 @@ function getvalue_func() {
     //         // fetch_data_between_time_range(regex, counters, files_array,t1, t2);
     //     }
     // }
-    
 }
 
 

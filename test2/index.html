@@ -2,6 +2,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="counter.css">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="css/multi.select.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -72,7 +74,7 @@
     width: 80%;">
       <div class="col-sm-1"><label for="name">Select Counter:</label></div>
      <div class="col-sm-10">
-     <select id="counter"  multiple data-multi-select-plugin>
+     <!-- <select id="counter"  multiple data-multi-select-plugin>
       <option value="http_tot_request_header_bytes_received">http_tot_request_header_bytes_received</option>
       <option value="http_tot_request_received">http_tot_request_received</option>
       <option value="http_tot_transaction_complete">http_tot_transaction_complete</option>
@@ -81,18 +83,48 @@
       <option value="http_tot_Gets">http_tot_Gets</option>
       <option value="http_tot_request_header_partial_chunks">http_tot_request_header_partial_chunks</option>
       <option value="http_tot_Connects">http_tot_Connects</option>
-    </select>
+    </select> -->
+    <div class="multi" id="multi"></div>
   </div>
     <div class="col-sm-1">
-      <button type="button" class="btn btn-primary" style="margin-left: -20px !important;" onclick="getvalue_func()">Proceed</button>
+      <button type="button" class="btn btn-primary" style="margin-left: -20px !important;" onclick="getvalue_func($('#multi').multi_select('getSelectedValues'))">Proceed</button>
     </div>
   </div>
   <p id="demo"></p>
-<div id="div_to_display_searched_contents" style="margin-top:50px;"></div>
+<div id="div_to_display_searched_contents" class="scrollable"></div>
 <script src="picker.js"></script>
 <!-- <script src="final.js"></script> -->
 <!-- <script src="counter_mon_data_assembler.js"></script> -->
-<script src="copy_new1.js"></script>
-<!-- <script src="abc.js"></script> -->
+<script src="newj.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="js/multi.select.js"></script>
+<script>
+  $('.multi').multi_select({
+  selectColor: 'purple',
+  selectSize: 'small',
+  selectText: 'Select Counters',
+  duration: 300,
+  easing: 'slide',
+  listMaxHeight: 200,
+  selectedCount: 2,
+  sortByText: true,
+  fillButton: true,
+  data: {
+    "http_tot_request_header_bytes_received": "http_tot_request_header_bytes_received",
+    "http_tot_request_received": "http_tot_request_received",
+    "http_tot_transaction_complete": "http_tot_transaction_complete",
+    "http_tot_request_bytes_received": "http_tot_request_bytes_received",
+    "http_tot_all_responses": "http_tot_all_responses",
+    "http_tot_Gets": "http_tot_Gets",
+    "http_tot_request_header_partial_chunks": "http_tot_request_header_partial_chunks",
+    "http_tot_Connects": "http_tot_Connects",
+    // "BM": "Bermuda",
+  },
+  onSelect: function(values) {
+    console.log('return values: ', values);
+  }
+  
+  });
+</script>
 </body>
 </html>

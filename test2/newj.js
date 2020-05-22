@@ -3,7 +3,8 @@ var hash_thres = {};
 var hash_interv = {};
 function gmt_date(gmt) {
     var z = String(gmt);
-    var gmt_d = z[6] + z[7] + z[8] + z[9] + z[10] + z[11] + z[12] + z[13] + z[14] + z[15] + z[16];
+    console.log(z.length);
+    var gmt_d = z[5] + z[6] + z[7] + z[8] + z[9] + z[10] + z[11] + z[12] + z[13] + z[14] + z[15];
     return gmt_d;
 }
 function getDateArray(start, end) {
@@ -150,7 +151,8 @@ function traverse_files(regex, counters, files_array, t1, t2)
 
 
 function show_table(final_counter_array) {
-	document.getElementById("div_to_display_searched_contents").innerHTML="";
+    document.getElementById("div_to_display_searched_contents").innerHTML="";
+    
     var table_element = document.createElement("TABLE");
     table_element.setAttribute("style", "border: 1px solid black; border-collapse: collapse; margin-left:auto;margin-right:auto; padding:50px;");
     var table_row1 = document.createElement("tr");
@@ -186,9 +188,20 @@ function show_table(final_counter_array) {
             table_data = document.createElement("td");
             // table_data.classList.add("mystyle");
             table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; text-align:center;");
-            text = document.createTextNode(x[final_counter_array[p]]);
-            table_data.appendChild(text);
-            table_row1.appendChild(table_data);
+            var table_data1 = document.createElement("td");
+            table_data1.setAttribute("style", "border: 1px solid black;border-collapse: collapse; text-align:center; background-color:green;");
+
+           if(final_counter_array[p] in Object.values(final_hash)[i]) {
+               text = document.createTextNode(x[final_counter_array[p]]);
+               table_data.appendChild(text);
+               table_row1.appendChild(table_data);
+           }
+            else{
+                text = document.createTextNode("All OK");
+                table_data1.appendChild(text);
+               table_row1.appendChild(table_data1);
+            }
+            
 
             // document.write(x[final_counter_array[p]]);
 
@@ -206,7 +219,7 @@ function show_table(final_counter_array) {
     document.getElementById("div_to_display_searched_contents").appendChild(table_element);
 }
 
-function getvalue_func() {
+function getvalue_func(counters_from_ajax) {
     var cloud_name = document.getElementById('cloud_name').value;
     var origi_date1 = document.getElementById('dp1').value;
     var origi_date2 = document.getElementById('dp2').value;
@@ -218,60 +231,65 @@ function getvalue_func() {
     var epoch2 = date2.getTime() / 1000;
     var gmt_start_date = gmt_date(gmt1);
     var gmt_end_date = gmt_date(gmt2);
-    // console.log(origi_date1, origi_date2, date1, date2, gmt1, gmt2, epoch1, epoch2);
-    console.log(gmt1, gmt2, gmt_start_date, gmt_end_date);
+    // console.log(origi_date1, origi_date2, date1, date2, gmt1, gmt2, epoch1, epoch2, gmt_start_date, gmt_end_date);
+    // console.log(gmt1, gmt2, gmt_start_date, gmt_end_date);
     var regex = document.getElementById('regex_name').value;
     var counters = [];
-    var x = document.getElementById("counter");
-    for (var i = 0; i < x.options.length; i++) {
-        if (x.options[i].selected == true) {
-            counters.push(x.options[i].value);
-        }
-    }
+    counters = counters_from_ajax;
+    // var x = document.getElementById("counter");
+    // for (var i = 0; i < x.options.length; i++) {
+    //     if (x.options[i].selected == true) {
+    //         counters.push(x.options[i].value);
+    //     }
+    // }
+    // console.log(counters);
     var files_array = [];
     if (epoch1 > epoch2) {
         console.log("Please enter correct range");
     }
     // Code for one file
-    var files_array = ["./counter_mon_logs/countermon_json_file_17-05-20_cloud_beta.json","./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"];
-    // ,"./counter_mon_logs/countermon_json_file_18-05-20_cloud_beta.json"
-    var t1 = epoch1;
-    var t2 = epoch2;
-    traverse_files(regex, counters, files_array,t1, t2);
+    // var files_array = ["./counter_mon_logs/beta/18 May 2020/18_1.json","./counter_mon_logs/beta/20 May 2020/20_1.json"];
+    // var t1 = epoch1;
+    // var t2 = epoch2;
+    // traverse_files(regex, counters, files_array,t1, t2);
 
 
     
 
-    // else {
-    //     if (gmt_start_date == gmt_end_date) {
-    //         var t1 = epoch1;
-    //         var t2 = epoch2;
-    //         console.log("you will get todays logs");
-    //         var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/';
-    //         for (var num = 1; num <= 6; num++) {
-    //             files_array.push(log_folder + num + '.json');
-    //         }
-    //         // fetch_data_between_time_range(regex, counters, files_array,t1, t2);
-    //         console.log(files_array);
-    //     }
-    //     else {
-    //         console.log("you will get all day data");
-    //         var dateArr = getDateArray(date1, date2);
-    //         console.log(dateArr);
-    //         var gmtArr = get_gmt_array(dateArr);
-    //         console.log(gmtArr);
-    //         var gmtdateArr = gmt_date_array(gmtArr);
-    //         console.log(gmtdateArr);
-    //         for (var i = 0; i < gmtdateArr.length; i++) {
-    //             var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmtdateArr[i] + '/';
-    //             for (var num = 1; num <= 6; num++) {
-    //                 files_array.push(log_folder + num + '.json');
-    //             }
-    //         }
-    //         console.log(files_array);
-    //         // fetch_data_between_time_range(regex, counters, files_array,t1, t2);
-    //     }
-    // }
+    else {
+        if (gmt_start_date == gmt_end_date) {
+            var t1 = epoch1;
+            var t2 = epoch2;
+            console.log("you will get todays logs");
+            var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/';
+            for (var num = 1; num <= 6; num++) {
+                files_array.push(log_folder + num + '.json');
+            }
+            traverse_files(regex, counters, files_array,t1, t2);
+            console.log(files_array);
+        }
+        else {
+            console.log("you will get all day data");
+            var t1 = epoch1;
+            var t2 = epoch2;
+            var dateArr = getDateArray(date1, date2);
+            console.log(dateArr);
+            var gmtArr = get_gmt_array(dateArr);
+            console.log(gmtArr);
+            var gmtdateArr = gmt_date_array(gmtArr);
+            console.log(gmtdateArr);
+            for (var i = 0; i < gmtdateArr.length; i++) {
+                var x = String(gmtdateArr[i]);
+                var pre = x[0]+x[1]+"_";
+                var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmtdateArr[i] + '/'+pre;
+                for (var num = 1; num <= 1; num++) {
+                    files_array.push(log_folder + num + '.json');
+                }
+            }
+            console.log(files_array);
+            traverse_files(regex, counters, files_array,t1, t2);
+        }
+    }
 }
 
 

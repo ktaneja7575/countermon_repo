@@ -151,6 +151,7 @@ function traverse_files(regex, counters, files_array, t1, t2)
 
 
 function show_table(final_counter_array) {
+
     document.getElementById("div_to_display_searched_contents").innerHTML="";
     
     var table_element = document.createElement("TABLE");
@@ -220,6 +221,7 @@ function show_table(final_counter_array) {
 }
 
 function getvalue_func(counters_from_ajax) {
+    final_hash = {};
     var cloud_name = document.getElementById('cloud_name').value;
     var origi_date1 = document.getElementById('dp1').value;
     var origi_date2 = document.getElementById('dp2').value;

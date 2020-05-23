@@ -231,7 +231,7 @@ function getvalue_func(counters_from_ajax) {
     var epoch2 = date2.getTime() / 1000;
     var gmt_start_date = gmt_date(gmt1);
     var gmt_end_date = gmt_date(gmt2);
-    // console.log(origi_date1, origi_date2, date1, date2, gmt1, gmt2, epoch1, epoch2, gmt_start_date, gmt_end_date);
+    console.log(origi_date1, origi_date2, date1, date2, gmt1, gmt2, epoch1, epoch2, gmt_start_date, gmt_end_date);
     // console.log(gmt1, gmt2, gmt_start_date, gmt_end_date);
     var regex = document.getElementById('regex_name').value;
     var counters = [];
@@ -244,9 +244,19 @@ function getvalue_func(counters_from_ajax) {
     // }
     // console.log(counters);
     var files_array = [];
-    if (epoch1 > epoch2) {
-        console.log("Please enter correct range");
-    }
+    var last_cron_epoch = new Date("5/21/2020 14:23:00").getTime()/1000;
+		var next_cron_epoch = last_cron_epoch + 14400;
+        console.log(last_cron_epoch, next_cron_epoch);
+        if (epoch1 > epoch2) {
+            console.log("Please enter correct range");
+            document.getElementById("msg_for_no_data").innerHTML = "Please enter correct Range";
+        }
+        else if(epoch1> last_cron_epoch && epoch2< next_cron_epoch){
+            var next_cron_time = new Date(next_cron_epoch*1000);
+            document.getElementById("msg_for_no_data").innerHTML = "you will get the stats for this time period at"+ String(next_cron_time);
+        }
+    
+    
     // Code for one file
     // var files_array = ["./counter_mon_logs/beta/18 May 2020/18_1.json","./counter_mon_logs/beta/20 May 2020/20_1.json"];
     // var t1 = epoch1;
@@ -288,6 +298,10 @@ function getvalue_func(counters_from_ajax) {
             }
             console.log(files_array);
             traverse_files(regex, counters, files_array,t1, t2);
+        }
+        if(epoch2>last_cron_epoch)
+        {
+            document.getElementById("msg_for_remain_data").innerHTML = "Data for the remaining time period will be availble at" + String(next_cron_time);
         }
     }
 }

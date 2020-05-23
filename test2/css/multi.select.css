@@ -1,17 +1,17 @@
 /* body{padding:100px;font-family:"Open sans","Helvetica Neue",Helvetica,Arial,sans-serif;background-color:#fff} */
 .wrapper{float:left;width:100%;margin:20px 0}
-.fill{color:#fff!important}.button-blue.fill{background-color:#367fa9}
+.fill{color: #000!important}.button-blue.fill{background-color:#367fa9}
 .button-green.fill{background-color:#5F9323}
 .button-aqua.fill{background-color:#00acd6}
 .button-red.fill{background-color:#d73925}
 .button-yellow.fill{background-color:#e08e0b}
 .button-maroon.fill{background-color:#b20e48}
-.button-purple.fill{ 
-    background-color:rgb(175, 200, 247); 
+/* .button-purple.fill{  */
+    /* background-color:rgb(175, 200, 247);  */
 /* border: 1px solid blue; */
-border-radius: 1px;
+/* border-radius: 1px; */
 
- }
+ /* } */
 .button-grey.fill{background-color:#5d636e}
 .multi-button,.button{display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:600;line-height:1.42857143;text-align:left;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:1px;background-color:#fff}
 .multi-button::after{background-color:transparent;border-left:none;box-sizing:border-box;color:#fff;content:"\2207";display:inline-block;font-family:"FontAwesome";height:100%;margin-left:-17px;padding:4px 4px 0 3px;pointer-events:none;position:absolute;right:0;text-align:center;top:0;vertical-align:middle;width:23px;z-index:2;transition:transform .25s linear;-webkit-transition:-webkit-transform .25s linear}

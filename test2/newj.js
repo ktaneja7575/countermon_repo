@@ -102,9 +102,9 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 // show_table(counters);
 }
 
-function Data_for_last_cron(data) {
-    document.getElementById("demo").innerHTML = "now u can analyse data till last crone time";
-}
+// function Data_for_last_cron(data) {
+//     document.getElementById("demo").innerHTML = "now u can analyse data till last crone time";
+// }
 function fetch_data_between_time_range(regex, counters, file_getter, t1, t2) {
 
 
@@ -217,7 +217,12 @@ function show_table(final_counter_array) {
         table_element.appendChild(table_row1);
 
     }
+    if (Object.keys(final_hash) == "undefined"){
+        document.getElementById("div_to_display_searched_contents").innerHTML = "No logs found between these ranges";
+    }
+    else{
     document.getElementById("div_to_display_searched_contents").appendChild(table_element);
+    }
 }
 
 function getvalue_func(counters_from_ajax) {
@@ -247,14 +252,14 @@ function getvalue_func(counters_from_ajax) {
     // console.log(counters);
     var files_array = [];
     var last_cron_epoch = new Date("5/21/2020 14:23:00").getTime()/1000;
-		var next_cron_epoch = last_cron_epoch + 14400;
+        var next_cron_epoch = last_cron_epoch + 14400;
+        var next_cron_time = new Date(next_cron_epoch*1000);
         console.log(last_cron_epoch, next_cron_epoch);
         if (epoch1 > epoch2) {
             console.log("Please enter correct range");
             document.getElementById("msg_for_no_data").innerHTML = "Please enter correct Range";
         }
         else if(epoch1> last_cron_epoch && epoch2< next_cron_epoch){
-            var next_cron_time = new Date(next_cron_epoch*1000);
             document.getElementById("msg_for_no_data").innerHTML = "you will get the stats for this time period at"+ String(next_cron_time);
         }
     
@@ -273,7 +278,9 @@ function getvalue_func(counters_from_ajax) {
             var t1 = epoch1;
             var t2 = epoch2;
             console.log("you will get todays logs");
-            var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/';
+            var x = String(gmt_start_date);
+                var pre = x[0]+x[1]+"_";
+            var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/'+pre;
             for (var num = 1; num <= 6; num++) {
                 files_array.push(log_folder + num + '.json');
             }
@@ -303,7 +310,7 @@ function getvalue_func(counters_from_ajax) {
         }
         if(epoch2>last_cron_epoch)
         {
-            document.getElementById("msg_for_remain_data").innerHTML = "Data for the remaining time period will be availble at" + String(next_cron_time);
+            document.getElementById("msg_for_remain_data").innerHTML = "Data for the remaining time period will be availble at"+ String(next_cron_time);
         }
     }
 }

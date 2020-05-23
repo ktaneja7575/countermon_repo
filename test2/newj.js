@@ -158,16 +158,16 @@ function show_table(final_counter_array) {
     var table_element = document.createElement("TABLE");
     table_element.setAttribute("style", "border: 1px solid black; border-collapse: collapse; margin-left:auto;margin-right:auto; padding:50px;");
     var table_row1 = document.createElement("tr");
-    table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse;  padding:15px; background-color:rgb(175, 200, 247)");
+    table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse;  padding:10px; background-color:rgb(175, 200, 247)");
     var table_heading = document.createElement("th");
-    table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:15px; ");
+    table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:10px; ");
     var text = document.createTextNode("INSTANCE NAME");
     table_heading.appendChild(text);
     table_row1.appendChild(table_heading);
     table_element.appendChild(table_row1);
     for (var p = 0; p < final_counter_array.length; p++) {
         table_heading = document.createElement("th");
-        table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:15px");
+        table_heading.setAttribute("style", "border: 1px solid black;border-collapse: collapse;text-align: center;  padding:10px");
         text = document.createTextNode(final_counter_array[p] + " thrs:" + hash_thres[final_counter_array[p]] + " time-interval:" + hash_interv[final_counter_array[p]]);
         table_heading.appendChild(text);
         table_row1.appendChild(table_heading);
@@ -178,10 +178,10 @@ function show_table(final_counter_array) {
         // document.write(Object.keys(final_hash)[i]);
         var x = Object.values(final_hash)[i];
         table_row1 = document.createElement("tr");
-        table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:15px");
+        table_row1.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:10px");
         var table_data = document.createElement("td");
         // table_data.classList.add("mystyle");
-        table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:15px");
+        table_data.setAttribute("style", "border: 1px solid black;border-collapse: collapse; padding:10px");
         text = document.createTextNode(Object.keys(final_hash)[i]);
         table_data.appendChild(text);
         table_row1.appendChild(table_data);
@@ -222,15 +222,36 @@ function show_table(final_counter_array) {
 
     }
     if (Object.keys(final_hash)[0] == "undefined" || flag == 0){
-        document.getElementById("div_to_display_searched_contents").innerHTML = "No logs found between these ranges";
+        var temp_div = document.createElement("div");
+        temp_div.setAttribute("class","alert");
+        temp_div.className = "alert";
+        var text=document.createTextNode("No logs found between these ranges !!");
+        temp_div.appendChild(text);
+        document.getElementById("div_to_display_searched_contents").appendChild(temp_div);
+        // document.getElementById("div_to_display_searched_contents").innerHTML = "No logs found between these ranges !!";
     }
     else{
-    document.getElementById("div_to_display_searched_contents").appendChild(table_element);
+        var master_div = document.createElement("div");
+        var text_div = document.createElement("div");
+        text_div.setAttribute("style","font-size:20px;text-align:center;padding:10px;color: rgb(254, 195, 118);");
+        var text=document.createTextNode("Countermon Report");
+        // text.setAttribute("style","font-size:20px;text-align:center");
+        text_div.appendChild(text);
+        master_div.appendChild(text_div);
+        var temp_div = document.createElement("div");
+        temp_div.setAttribute("class","scrollable");
+        temp_div.className = "scrollable";
+        temp_div.appendChild(table_element);
+        master_div.appendChild(temp_div);
+    document.getElementById("div_to_display_searched_contents").appendChild(master_div);
     }
 }
 
 function getvalue_func(counters_from_ajax) {
     final_hash = {};
+    document.getElementById("msg_for_no_data").innerHTML = "";
+    document.getElementById("msg_for_remain_data").innerHTML = "";
+    document.getElementById("div_to_display_searched_contents").innerHTML = "";
     var cloud_name = document.getElementById('cloud_name').value;
     var origi_date1 = document.getElementById('dp1').value;
     var origi_date2 = document.getElementById('dp2').value;
@@ -262,14 +283,33 @@ function getvalue_func(counters_from_ajax) {
         console.log(last_cron_epoch, next_cron_epoch);
         if(counters.length == 0)
         {
-            document.getElementById("msg_for_no_data").innerHTML = "You did not select any intances, To get log Count please select Counters!!";
+            var temp_div = document.createElement("div");
+            temp_div.setAttribute("class","alert");
+            temp_div.className = "alert";
+            var text=document.createTextNode("You did not select any intances, To get log Count please select Counters!!");
+            temp_div.appendChild(text);
+            document.getElementById("msg_for_no_data").appendChild(temp_div);
+            // document.getElementById("msg_for_no_data").innerHTML = "You did not select any intances, To get log Count please select Counters!!";
         }
         else if (epoch1 > epoch2) {
             console.log("Please enter correct range");
-            document.getElementById("msg_for_no_data").innerHTML = "Please enter correct Range";
+            var temp_div = document.createElement("div");
+            temp_div.setAttribute("class","alert");
+            temp_div.className = "alert";
+            var text=document.createTextNode("Please enter correct Range!!");
+            temp_div.appendChild(text);
+            document.getElementById("msg_for_no_data").appendChild(temp_div);
+            // document.getElementById("msg_for_no_data").innerHTML = "Please enter correct Range!!";
         }
         else if(epoch1> last_cron_epoch && epoch2< curr_epoch){
-            document.getElementById("msg_for_no_data").innerHTML = "you will get the stats for this time period at"+ String(next_cron_time);
+            console.log("Please enter correct range");
+            var temp_div = document.createElement("div");
+            temp_div.setAttribute("class","alert");
+            temp_div.className = "alert";
+            var text=document.createTextNode("you will get the stats for this time period at "+ String(next_cron_time));
+            temp_div.appendChild(text);
+            document.getElementById("msg_for_no_data").appendChild(temp_div);
+            // document.getElementById("msg_for_no_data").innerHTML = "you will get the stats for this time period at "+ String(next_cron_time);
         }
     
     
@@ -319,7 +359,14 @@ function getvalue_func(counters_from_ajax) {
         }
         if(epoch2>last_cron_epoch)
         {
-            document.getElementById("msg_for_remain_data").innerHTML = "Data for the remaining time period will be availble at"+ String(next_cron_time);
+            console.log("Please enter correct range");
+            var temp_div = document.createElement("div");
+            temp_div.setAttribute("class","alert");
+            temp_div.className = "alert";
+            var text=document.createTextNode("Data for the remaining time period will be availble at "+ String(next_cron_time));
+            temp_div.appendChild(text);
+            document.getElementById("msg_for_remain_data").appendChild(temp_div);
+            // document.getElementById("msg_for_remain_data").innerHTML = "Data for the remaining time period will be availble at "+ String(next_cron_time);
         }
     }
 }

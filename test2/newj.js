@@ -151,6 +151,7 @@ function traverse_files(regex, counters, files_array, t1, t2)
 
 
 function show_table(final_counter_array) {
+    var flag = 0;
 
     document.getElementById("div_to_display_searched_contents").innerHTML="";
     
@@ -193,6 +194,9 @@ function show_table(final_counter_array) {
             table_data1.setAttribute("style", "border: 1px solid black;border-collapse: collapse; text-align:center; background-color:green;");
 
            if(final_counter_array[p] in Object.values(final_hash)[i]) {
+               if(x[final_counter_array[p]] != 0){
+                   flag = 1;
+               }
                text = document.createTextNode(x[final_counter_array[p]]);
                table_data.appendChild(text);
                table_row1.appendChild(table_data);
@@ -217,7 +221,7 @@ function show_table(final_counter_array) {
         table_element.appendChild(table_row1);
 
     }
-    if (Object.keys(final_hash) == "undefined"){
+    if (Object.keys(final_hash)[0] == "undefined" || flag == 0){
         document.getElementById("div_to_display_searched_contents").innerHTML = "No logs found between these ranges";
     }
     else{
@@ -249,17 +253,22 @@ function getvalue_func(counters_from_ajax) {
     //         counters.push(x.options[i].value);
     //     }
     // }
-    // console.log(counters);
+    // console.log(counters.length);
     var files_array = [];
     var last_cron_epoch = new Date("5/21/2020 14:23:00").getTime()/1000;
+    var curr_epoch = new Date().getTime()/1000;
         var next_cron_epoch = last_cron_epoch + 14400;
         var next_cron_time = new Date(next_cron_epoch*1000);
         console.log(last_cron_epoch, next_cron_epoch);
-        if (epoch1 > epoch2) {
+        if(counters.length == 0)
+        {
+            document.getElementById("msg_for_no_data").innerHTML = "You did not select any intances, To get log Count please select Counters!!";
+        }
+        else if (epoch1 > epoch2) {
             console.log("Please enter correct range");
             document.getElementById("msg_for_no_data").innerHTML = "Please enter correct Range";
         }
-        else if(epoch1> last_cron_epoch && epoch2< next_cron_epoch){
+        else if(epoch1> last_cron_epoch && epoch2< curr_epoch){
             document.getElementById("msg_for_no_data").innerHTML = "you will get the stats for this time period at"+ String(next_cron_time);
         }
     

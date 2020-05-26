@@ -15,7 +15,8 @@ function gmt_date(gmt) {
             mon = i + 1;
         }
     }
-    if(mon.length == 2)
+    var s = String(mon);
+    if(s.length == 2)
     {
         var gmt_d = day+"-"+mon+"-"+year;
     }

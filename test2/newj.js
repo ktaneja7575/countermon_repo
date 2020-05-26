@@ -4,7 +4,26 @@ var hash_interv = {};
 function gmt_date(gmt) {
     var z = String(gmt);
     console.log(z.length);
-    var gmt_d = z[5] + z[6] + z[7] + z[8] + z[9] + z[10] + z[11] + z[12] + z[13] + z[14] + z[15];
+    var day = z[5]+z[6];
+    var mon;
+    var year = z[14]+z[15];
+    var mon_str = z[8] + z[9] + z[10];
+    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    for(var i=0;i<11;i++)
+    {
+        if(month[i] == mon_str){
+            mon = i + 1;
+        }
+    }
+    if(mon.length == 2)
+    {
+        var gmt_d = day+"-"+mon+"-"+year;
+    }
+    else
+    {
+        var gmt_d = day+"-0"+mon+"-"+year;
+    }
+    // var gmt_d = z[5] + z[6] + z[7] + z[8] + z[9] + z[10] + z[11] + z[12] + z[13] + z[14] + z[15];
     return gmt_d;
 }
 function getDateArray(start, end) {
@@ -275,7 +294,15 @@ function getvalue_func(counters_from_ajax) {
     //     }
     // }
     // console.log(counters.length);
-    var files_array = [];
+    var files_array = []; 
+    var pre_epoch = epoch1 - 14400;
+    var pre_date = new Date(pre_epoch*1000);
+    var pre_gmt_time = pre_date.toUTCString();
+    var pre_gmt_date = gmt_date(pre_gmt_time);
+    console.log(pre_date, pre_gmt_time, pre_gmt_date);
+    if(gmt_start_date != pre_gmt_date){
+    files_array.push('./counter_mon_logs/' + cloud_name + '/' + pre_gmt_date + '/'+pre_gmt_date[0]+pre_gmt_date[1]+"_6.json")
+    }
     var last_cron_epoch = new Date("5/21/2020 14:23:00").getTime()/1000;
     var curr_epoch = new Date().getTime()/1000;
         var next_cron_epoch = last_cron_epoch + 14400;

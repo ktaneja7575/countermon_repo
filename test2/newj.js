@@ -117,11 +117,19 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
                 var thres = counters[k] + "_threshold";
                 var time_interval = counters[k] + "_time_interval";
                 var inst_count_time_val = 0;
-                for (var c = 0; c < object_getter[counters[k]][time_value].length; c = c + 2) {
-                    if (object_getter[counters[k]][time_value][c] >= t1 && object_getter[counters[k]][time_value][c] <= t2) {
-                        inst_count_time_val++;
+                // if(object_getter[counters[k]][time_value].length)
+                // {
+                //     alert(object_getter[counters[k]][time_value].length);
+                // }
+                if(counters[k] in object_getter)
+                {
+                    for (var c = 0; c < object_getter[counters[k]][time_value].length; c = c + 2) {
+                        if (object_getter[counters[k]][time_value][c] >= t1 && object_getter[counters[k]][time_value][c] <= t2) {
+                            inst_count_time_val++;
+                        }
                     }
                 }
+                
                 // console.log(objx);
                 if (counters[k] in final_hash[instances_array[j]]) {
                     console.log("you are in counter");

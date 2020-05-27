@@ -345,7 +345,7 @@ function getvalue_func(counters_from_ajax, data) {
 
     console.log(pre_date, pre_gmt_time, pre_gmt_date);
     if (gmt_start_date != pre_gmt_date) {
-        files_array.push('./counter_mon_logs/' + cloud_name + '/' + pre_gmt_date + '/' + pre_gmt_date[0] + pre_gmt_date[1] + "_6.json")
+        files_array.push('./counter_mon_logs/' + cloud_name + '/' + pre_gmt_date + '/6.json')
     }
     // get_gmt_data("./counter_mon_logs/timestamp");
     // var last_cron_gmt = s;
@@ -401,8 +401,8 @@ function getvalue_func(counters_from_ajax, data) {
                 var t2 = epoch2;
                 console.log("you will get todays logs");
                 var x = String(gmt_start_date);
-                var pre = x[0] + x[1] + "_";
-                var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/' + pre;
+                // var pre = x[0] + x[1] + "_";
+                var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/';
                 for (var num = 1; num <= 6; num++) {
                     files_array.push(log_folder + num + '.json');
                 }
@@ -429,8 +429,8 @@ function getvalue_func(counters_from_ajax, data) {
                 console.log(gmtdateArr);
                 for (var i = 0; i < gmtdateArr.length; i++) {
                     var x = String(gmtdateArr[i]);
-                    var pre = x[0] + x[1] + "_";
-                    var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmtdateArr[i] + '/' + pre;
+                    // var pre = x[0] + x[1] + "_";
+                    var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmtdateArr[i] + '/';
                     for (var num = 1; num <= 6; num++) {
                         files_array.push(log_folder + num + '.json');
                     }
@@ -453,8 +453,8 @@ function getvalue_func(counters_from_ajax, data) {
                 var t2 = epoch2;
                 console.log("you will get todays logs");
                 var x = String(gmt_start_date);
-                var pre = x[0] + x[1] + "_";
-                var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/' + pre;
+                // var pre = x[0] + x[1] + "_";
+                var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmt_start_date + '/';
                 for (var num = 1; num <= 6; num++) {
                     files_array.push(log_folder + num + '.json');
                 }
@@ -481,8 +481,8 @@ function getvalue_func(counters_from_ajax, data) {
                 console.log(gmtdateArr);
                 for (var i = 0; i < gmtdateArr.length; i++) {
                     var x = String(gmtdateArr[i]);
-                    var pre = x[0] + x[1] + "_";
-                    var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmtdateArr[i] + '/' + pre;
+                    // var pre = x[0] + x[1] + "_";
+                    var log_folder = './counter_mon_logs/' + cloud_name + '/' + gmtdateArr[i] + '/';
                     for (var num = 1; num <= 6; num++) {
                         files_array.push(log_folder + num + '.json');
                     }

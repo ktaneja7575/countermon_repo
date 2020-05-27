@@ -128,9 +128,7 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
                             inst_count_time_val++;
                         }
                     }
-                }
-                
-                // console.log(objx);
+                    // console.log(objx);
                 if (counters[k] in final_hash[instances_array[j]]) {
                     console.log("you are in counter");
                     final_hash[instances_array[j]][counters[k]] = final_hash[instances_array[j]][counters[k]] + inst_count_time_val;
@@ -151,6 +149,8 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
                 else {
                     hash_interv[counters[k]] = object_getter[counters[k]][time_interval];
                 }
+            }
+                    
             }
 
         }

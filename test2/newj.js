@@ -101,6 +101,7 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
     instances_array = get_instances_return_array(data, regex);
     for (var j = 0; j < instances_array.length; j++) {
         var object_getter = get_object_corresponding_to_instance(data, instances_array[j]);
+        // console.log(object_getter);
         if (instances_array[j] in final_hash) {
             console.log("alread exist instance");
             var objx = final_hash[instances_array[j]];
@@ -262,7 +263,7 @@ function show_table(final_counter_array,e1, e2) {
                 table_row1.appendChild(table_data);
                 }
                 else{
-                    text = document.createTextNode("0");
+                    text = document.createTextNode("All OK");
                     table_data1.appendChild(text);
                     table_row1.appendChild(table_data1);
                 }

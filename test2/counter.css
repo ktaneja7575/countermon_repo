@@ -15,6 +15,16 @@
     border-color: rgba(126, 182, 193, 1);
   }
 
+.td_class{
+    border: 1px solid black;
+    border-collapse: collapse; 
+    text-align:center;
+}
+
+#table_main tr td:hover {
+    background-color: rgb(235, 235, 217);
+  }
+
 
 
 .scrollable {

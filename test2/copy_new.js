@@ -54,29 +54,15 @@ function get_new_format(str){
     return chng_str;
 }
 
+function get_new_format3(str){
+    var p = String(str);
+    var chng_str = p[0]+p[1]+p[2]+p[3]+p[4]+p[5]+p[6]+p[7]+p[8]+p[9]+p[10]+p[11]+p[12]+p[13]+p[14];
+    return chng_str;
+}
+
 
 function get_new_format2(str){
     var p = String(str);
-    // var week_day = p[0]+1
-    // var day = p[8] + p[9];
-    // var mon;
-    // var year = p[13] + p[14];
-    // var mon_str = p[4] + p[5] + p[6];
-    // var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    // for (var i = 0; i < 11; i++) {
-    //     if (month[i] == mon_str) {
-    //         mon = i + 1;
-    //     }
-    // }
-    // var s = String(mon);
-    // if (s.length == 2) {
-    //     var dat = day + "-" + mon + "-" + year;
-    // }
-    // else {
-    //     var dat = day + "-0" + mon + "-" + year;
-    // }
-
-    // var tim = p[16]+p[17]+p[18]+p[19]+p[20];
     var chng_str = p[0]+p[1]+p[2]+p[3]+p[4]+p[5]+p[6]+p[7]+p[8]+p[9]+p[10]+p[11]+p[12]+p[13]+p[14]+p[15]+p[16]+p[17]+p[18]+p[19]+p[20]+p[21]+p[22]+p[23]+" (IST)";
     return chng_str;
 }
@@ -631,6 +617,229 @@ function get_gmt_data(counters_from_ajax) {
 
 // 	localStorage.setItem('inst_name', JSON.stringify(instance_val));
 // }
+function show_exp_data(){
+    // console.log(optn)
+    document.getElementById("expanded_table").innerHTML=" ";
+    var optn = document.getElementById("select_date");
+    var arr_for_time = JSON.parse(sessionStorage.getItem('time_hash'));
+    console.log(arr_for_time.length);
+    var d = optn.options[optn.selectedIndex].value;
+    var final_arr = new Array();
+    for(var i=0;i<arr_for_time.length;i=i+2){
+        var str = get_new_format3(new Date(arr_for_time[i]*1000));
+        if(d == str)
+        {
+            final_arr.push(arr_for_time[i]);
+            final_arr.push(arr_for_time[i+1]);
+        }
+    }
+
+    var master_div = document.createElement("div");
+    master_div.setAttribute("id", "master");
+
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "div_class");    
+    var table1 = document.createElement("table");
+    table1.setAttribute("class", "table");
+    var t_h1 = document.createElement("thead");
+    var r1 = document.createElement("tr");
+    var h_time1 = document.createElement("th");
+    var h_t1 = document.createTextNode("Time");
+    h_time1.appendChild(h_t1);
+    var h_value1 = document.createElement("th");
+    var h_v1 = document.createTextNode("Value");
+    h_value1.appendChild(h_v1);
+    r1.appendChild(h_time1);
+    r1.appendChild(h_value1);
+    t_h1.appendChild(r1);
+    table1.appendChild(t_h1);
+    div1.appendChild(table1);
+    master_div.appendChild(div1);
+
+
+
+    var div2 = document.createElement("div");
+    div2.setAttribute("class", "div_class");    
+    var table2 = document.createElement("table");
+    table2.setAttribute("class", "table");
+    var t_h2 = document.createElement("thead");
+    var r2 = document.createElement("tr");
+    var h_time2 = document.createElement("th");
+    var h_t2 = document.createTextNode("Time");
+    h_time2.appendChild(h_t2);
+    var h_value2 = document.createElement("th");
+    var h_v2 = document.createTextNode("Value");
+    h_value2.appendChild(h_v2);
+    r2.appendChild(h_time2);
+    r2.appendChild(h_value2);
+    t_h2.appendChild(r2);
+    table2.appendChild(t_h2);
+    div2.appendChild(table2);
+    master_div.appendChild(div2);
+
+
+
+
+    var div3 = document.createElement("div");
+    div3.setAttribute("class", "div_class");    
+    var table3 = document.createElement("table");
+    table3.setAttribute("class", "table");
+    var t_h3 = document.createElement("thead");
+    var r3 = document.createElement("tr");
+    var h_time3 = document.createElement("th");
+    var h_t3 = document.createTextNode("Time");
+    h_time3.appendChild(h_t3);
+    var h_value3 = document.createElement("th");
+    var h_v3 = document.createTextNode("Value");
+    h_value3.appendChild(h_v3);
+    r3.appendChild(h_time3);
+    r3.appendChild(h_value3);
+    t_h3.appendChild(r3);
+    table3.appendChild(t_h3);
+    div3.appendChild(table3);
+    master_div.appendChild(div3);
+
+    var size = final_arr.length/2;
+    var s1 = parseInt(size/3);
+    var s2 = s1*2;
+    var c=1;
+    for(var j=0; j<final_arr.length; j=j+2){
+        var row = document.createElement("tr");
+        var data1 = document.createElement("td");
+        var time = document.createTextNode(get_new_format2(new Date(final_arr[j]*1000)));
+        data1.appendChild(time);
+        var data2 = document.createElement("td");
+        var val = document.createTextNode(final_arr[j+1]);
+        data2.appendChild(val);
+        row.appendChild(data1);
+        row.appendChild(data2);
+        if(c<=s1)
+        {
+            table1.appendChild(row);
+        }
+        else if(c<=s2)
+        {
+            table2.appendChild(row);
+        }
+        else
+        {
+            table3.appendChild(row);
+        }
+        c++;
+    }
+
+
+
+
+   document.getElementById("expanded_table").appendChild(master_div);
+// document.getElementById("expanded_table").innerHTML= final_arr.length;
+}
+
+
+
+function print_data(){
+    var final_arr = JSON.parse(sessionStorage.getItem('time_hash'));
+    var master_div = document.createElement("div");
+    master_div.setAttribute("id", "master");
+
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "div_class");    
+    var table1 = document.createElement("table");
+    table1.setAttribute("class", "table");
+    var t_h1 = document.createElement("thead");
+    var r1 = document.createElement("tr");
+    var h_time1 = document.createElement("th");
+    var h_t1 = document.createTextNode("Time");
+    h_time1.appendChild(h_t1);
+    var h_value1 = document.createElement("th");
+    var h_v1 = document.createTextNode("Value");
+    h_value1.appendChild(h_v1);
+    r1.appendChild(h_time1);
+    r1.appendChild(h_value1);
+    t_h1.appendChild(r1);
+    table1.appendChild(t_h1);
+    div1.appendChild(table1);
+    master_div.appendChild(div1);
+
+
+
+    var div2 = document.createElement("div");
+    div2.setAttribute("class", "div_class");    
+    var table2 = document.createElement("table");
+    table2.setAttribute("class", "table");
+    var t_h2 = document.createElement("thead");
+    var r2 = document.createElement("tr");
+    var h_time2 = document.createElement("th");
+    var h_t2 = document.createTextNode("Time");
+    h_time2.appendChild(h_t2);
+    var h_value2 = document.createElement("th");
+    var h_v2 = document.createTextNode("Value");
+    h_value2.appendChild(h_v2);
+    r2.appendChild(h_time2);
+    r2.appendChild(h_value2);
+    t_h2.appendChild(r2);
+    table2.appendChild(t_h2);
+    div2.appendChild(table2);
+    master_div.appendChild(div2);
+
+
+
+
+    var div3 = document.createElement("div");
+    div3.setAttribute("class", "div_class");    
+    var table3 = document.createElement("table");
+    table3.setAttribute("class", "table");
+    var t_h3 = document.createElement("thead");
+    var r3 = document.createElement("tr");
+    var h_time3 = document.createElement("th");
+    var h_t3 = document.createTextNode("Time");
+    h_time3.appendChild(h_t3);
+    var h_value3 = document.createElement("th");
+    var h_v3 = document.createTextNode("Value");
+    h_value3.appendChild(h_v3);
+    r3.appendChild(h_time3);
+    r3.appendChild(h_value3);
+    t_h3.appendChild(r3);
+    table3.appendChild(t_h3);
+    div3.appendChild(table3);
+    master_div.appendChild(div3);
+
+    var size = final_arr.length/2;
+    var s1 = parseInt(size/3);
+    var s2 = s1*2;
+    var c=1;
+    for(var j=0; j<final_arr.length; j=j+2){
+        var row = document.createElement("tr");
+        var data1 = document.createElement("td");
+        var time = document.createTextNode(get_new_format2(new Date(final_arr[j]*1000)));
+        data1.appendChild(time);
+        var data2 = document.createElement("td");
+        var val = document.createTextNode(final_arr[j+1]);
+        data2.appendChild(val);
+        row.appendChild(data1);
+        row.appendChild(data2);
+        if(c<=s1)
+        {
+            table1.appendChild(row);
+        }
+        else if(c<=s2)
+        {
+            table2.appendChild(row);
+        }
+        else
+        {
+            table3.appendChild(row);
+        }
+        c++;
+    }
+
+
+   document.getElementById("expanded_table").appendChild(master_div);
+}
+
+
+
+
 
 function expanded_data()
 {
@@ -640,7 +849,26 @@ function expanded_data()
     var interval = JSON.parse(localStorage.getItem('interval_value'));
     var toatalhit = JSON.parse(localStorage.getItem('hit_value'));
     var arr_for_time = JSON.parse(sessionStorage.getItem('time_hash'));
-    console.log(typeof(hash_for_time));
+    // console.log(typeof(hash_for_time));
+
+
+    console.log(arr_for_time.length);
+    var d1 =0;
+    var dates = new Array();
+    for(var i=0;i<arr_for_time.length;i=i+2)
+    {
+        var d2 = get_new_format3(new Date(arr_for_time[i]*1000));
+        if(d2 != d1){
+            dates.push(d2);
+            d1 = d2;
+        }
+    }
+    console.log(dates.length);
+    console.log(dates);
+
+
+
+
 
     var table_1 = document.createElement("table");
     table_1.setAttribute("class", "table1");
@@ -672,199 +900,222 @@ function expanded_data()
     table1_r.appendChild(table1_h3);
     table1_r.appendChild(table1_h4);
     table1_r.appendChild(table1_h5);
+    
     table_1.appendChild(table1_r);
-    
-
-
-
-
-
-
-    // document.write(instance+counter+threshold+interval);
-    // document.write(hash_for_time[instance][counter]);
-    // var inst_div_i = document.createElement("div");
-    // var text_i = document.createTextNode("Instance: "+instance);
-    // inst_div_i.appendChild(text_i);
-    // document.getElementById("instance").appendChild(inst_div_i);
-    // // document.getElementById("instance").innerHTML = instance;
-    // var inst_div_c = document.createElement("div");
-    // var text_c = document.createTextNode("counter: "+counter);
-    // inst_div_c.appendChild(text_c);
-    // document.getElementById("counter").appendChild(inst_div_c);
-
-
-    // var inst_div_t = document.createElement("div");
-    // var text_t = document.createTextNode("Threshold Value: "+threshold);
-    // inst_div_t.appendChild(text_t);
-    // document.getElementById("thres").appendChild(inst_div_t);
-
-
-    // var inst_div_l = document.createElement("div");
-    // var text_l = document.createTextNode("Time Interval:"+ interval);
-    // inst_div_l.appendChild(text_l);
-    // document.getElementById("interval").appendChild(inst_div_l);
-
-
-    // var inst_div_h = document.createElement("div");
-    // var text_h = document.createTextNode("Total Hits: "+toatalhit);
-    // inst_div_h.appendChild(text_h);
-    // document.getElementById("hit").appendChild(inst_div_h);
-
-    // var div_up = document.createElement("div");
-    // var text_h = document.createTextNode("Instance: "+instance+" "+" counter: "+counter+"   "+"Threshold Value: "+threshold+"   "+"Time Interval:"+ interval+"   "+"Total Hits: "+toatalhit)
-    // div_up.setAttribute("style", "padding: 20px;")
-    // div_up.appendChild(text_h);
-    var time_val_arr = arr_for_time;
-    console.log(time_val_arr.length);
-    
-    var main = document.createElement("div");
-
     var master = document.createElement("div");
-    master.setAttribute("style", "margin-left:10%; ");
-    var master_div1 = document.createElement("div");
-    master_div1.setAttribute("style", "float:left; width:30%");
-    var master_div2 = document.createElement("div");
-    master_div2.setAttribute("style", "float:left; width:30%");
-    var master_div3 = document.createElement("div");
-    master_div3.setAttribute("style", "float:left; width:30%");
+    master.appendChild(table_1);
+   
+if(dates.length >1){
 
-    var d1 =0;
-    var total = time_val_arr.length;
-    var val_num = total/2;
-    var k = val_num/3;
-    var j= k*2;
-    var q,f,i=0;
-    for(i;i<j;i=i+2){
-        var t = get_new_format2(new Date(time_val_arr[i]*1000));
-        var s = String(t);
-        var d2 = s[8]+s[9];
-        if(d1 != d2){
-            d1 = d2;
-            // master_div1.appendChild(ex_table1);
-            var ex_table1 = document.createElement("Table");
-            ex_table1.setAttribute("class", "table2");
-            var table_h = document.createElement("thead");
-            var ex_table_row_head = document.createElement("tr");
-            var ex_table_head = document.createElement("th");
-            var heading_time = document.createTextNode("Time");
-            ex_table_head.appendChild(heading_time);
-            ex_table_row_head.appendChild(ex_table_head);
-            var ex_table_head1 = document.createElement("th");
-            var heading_value = document.createTextNode("Value");
-            ex_table_head1.appendChild(heading_value);
-            ex_table_row_head.appendChild(ex_table_head1);
-            table_h.appendChild(ex_table_row_head);
-            ex_table1.appendChild(table_h);
-            master_div1.appendChild(ex_table1);
-        }
-        var text_time = document.createTextNode(t);
-        var text_val = document.createTextNode(time_val_arr[i+1]);
-        var data_time = document.createElement("td");
-        var data_val = document.createElement("td");
-        var row = document.createElement("tr");
-        data_time.appendChild(text_time);
-        row.appendChild(data_time);
-        data_val.appendChild(text_val);
-        row.appendChild(data_val);
-        ex_table1.appendChild(row);
-        // if(c%3 == 0)
-        // {
-        // ex_table3.appendChild(row);
-        // }
-        // else if(c%2 == 0)
-        // {
-        //     ex_table2.appendChild(row);
-        // }
-        // else{
-        //     ex_table1.appendChild(row);
-        // }
-        // c++;
-    }
-    // master_div1.appendChild(table_1); 
-    master.appendChild(master_div1);
-    // master_div1.appendChild(ex_table2);
-    // master_div1.appendChild(ex_table3);   
-    for(q=i;q<(j*2);q=q+2){
-        var t = get_new_format2(new Date(time_val_arr[q]*1000));
-        var s = String(t);
-        var d2 = s[8]+s[9];
-        if(d1 != d2 || q ==i){
-            if(d1 != d2){
-                d1 = d2;
-            }
-            
-            // master_div1.appendChild(ex_table1);
-            var ex_table1 = document.createElement("Table");
-            ex_table1.setAttribute("class", "table2");
-            var table_h = document.createElement("thead");
-            var ex_table_row_head = document.createElement("tr");
-            var ex_table_head = document.createElement("th");
-            var heading_time = document.createTextNode("Time");
-            ex_table_head.appendChild(heading_time);
-            ex_table_row_head.appendChild(ex_table_head);
-            var ex_table_head1 = document.createElement("th");
-            var heading_value = document.createTextNode("Value");
-            ex_table_head1.appendChild(heading_value);
-            ex_table_row_head.appendChild(ex_table_head1);
-            table_h.appendChild(ex_table_row_head);
-            ex_table1.appendChild(table_h);
-            master_div2.appendChild(ex_table1);
-        }
-        var text_time = document.createTextNode(t);
-        var text_val = document.createTextNode(time_val_arr[q+1]);
-        var data_time = document.createElement("td");
-        var data_val = document.createElement("td");
-        var row = document.createElement("tr");
-        data_time.appendChild(text_time);
-        row.appendChild(data_time);
-        data_val.appendChild(text_val);
-        row.appendChild(data_val);
-        ex_table1.appendChild(row);
-    }
-    master.appendChild(master_div2);
-    for(f=q;f<total;f=f+2){
-        var t = get_new_format2(new Date(time_val_arr[f]*1000));
-        var s = String(t);
-        var d2 = s[8]+s[9];
-        if(d1 != d2 || f ==q){
-            if(d1 != d2){
-                d1 = d2;
-            }
-            var ex_table1 = document.createElement("Table");
-            ex_table1.setAttribute("class", "table2");
-            var table_h = document.createElement("thead");
-            var ex_table_row_head = document.createElement("tr");
-            var ex_table_head = document.createElement("th");
-            var heading_time = document.createTextNode("Time");
-            ex_table_head.appendChild(heading_time);
-            ex_table_row_head.appendChild(ex_table_head);
-            var ex_table_head1 = document.createElement("th");
-            var heading_value = document.createTextNode("Value");
-            ex_table_head1.appendChild(heading_value);
-            ex_table_row_head.appendChild(ex_table_head1);
-            table_h.appendChild(ex_table_row_head);
-            ex_table1.appendChild(table_h);
-            master_div3.appendChild(ex_table1);
-        }
-        var text_time = document.createTextNode(t);
-        var text_val = document.createTextNode(time_val_arr[f+1]);
-        var data_time = document.createElement("td");
-        var data_val = document.createElement("td");
-        var row = document.createElement("tr");
-        data_time.appendChild(text_time);
-        row.appendChild(data_time);
-        data_val.appendChild(text_val);
-        row.appendChild(data_val);
-        ex_table1.appendChild(row);
-    }
-    master.appendChild(master_div3);
-    main.appendChild(table_1);
-    main.appendChild(master);
-    document.getElementById("expanded_table").appendChild(main);
+table_2 = document.createElement("table");
+table_2.setAttribute("class", "table2");
+var table2_r = document.createElement("tr");
 
 
+var table1_h6 = document.createElement("th");   
+var sel = document.createElement("select");
+sel.setAttribute("id", "select_date");
+var sel_text = document.createTextNode("Select Date: ");
+table1_h6.appendChild(sel_text)
+table1_h6.appendChild(sel);
+
+
+
+var table1_h7 = document.createElement("th");
+var but = document.createElement("button");
+var t = document.createTextNode("Show");
+but.appendChild(t);
+but.setAttribute("id", "button");
+but.setAttribute("onclick", "show_exp_data()");
+table1_h7.appendChild(but);
+
+// table1_r.appendChild(table1_h5);
+table2_r.appendChild(table1_h6);
+table2_r.appendChild(table1_h7);
+
+table_2.appendChild(table2_r);
+
+master.appendChild(table_2);
 }
 
+document.getElementById("info").appendChild(master);
+
+
+// console.log(arr_for_time.length);
+// var d1 =0;
+// var dates = new Array();
+// for(var i=0;i<arr_for_time.length;i=i+2)
+// {
+//     var d2 = get_new_format3(new Date(arr_for_time[i]*1000));
+//     if(d2 != d1){
+//         dates.push(d2);
+//         d1 = d2;
+//     }
+// }
+if(dates.length > 1){
+console.log(dates.length);
+console.log(dates);
+var slect = document.getElementById("select_date");
+for (var i = 0; i < dates.length; i++) { 
+    var optn = dates[i]; 
+    var el = document.createElement("option"); 
+    // el.setAttribute("style", "padding:10px");
+    // el.setAttribute("id", optn);
+    // el.setAttribute("onclick", "show_exp_data(optn)");
+    el.textContent = optn; 
+    el.value = optn; 
+    slect.appendChild(el); 
+}
+
+}
+else{
+    print_data();
+}
+}
+
+
+
+
+
+
+
+
+
+
+    // var time_val_arr = arr_for_time;
+    // console.log(arr_for_time.length);
+    
+    // var main = document.createElement("div");
+
+    // var master = document.createElement("div");
+    // master.setAttribute("style", "margin-left:10%; ");
+    // var master_div1 = document.createElement("div");
+    // master_div1.setAttribute("style", "float:left; width:30%");
+    // var master_div2 = document.createElement("div");
+    // master_div2.setAttribute("style", "float:left; width:30%");
+    // var master_div3 = document.createElement("div");
+    // master_div3.setAttribute("style", "float:left; width:30%");
+
+    // var d1 =0;
+    // var total = time_val_arr.length;
+    // var val_num = total/2;
+    // var k = val_num/3;
+    // var j= k*2;
+    // var q,f,i=0;
+    // for(i;i<j;i=i+2){
+    //     var t = get_new_format2(new Date(time_val_arr[i]*1000));
+    //     var s = String(t);
+    //     var d2 = s[8]+s[9];
+    //     if(d1 != d2){
+    //         d1 = d2;
+
+    //         var ex_table1 = document.createElement("Table");
+    //         ex_table1.setAttribute("class", "table2");
+    //         var table_h = document.createElement("thead");
+    //         var ex_table_row_head = document.createElement("tr");
+    //         var ex_table_head = document.createElement("th");
+    //         var heading_time = document.createTextNode("Time");
+    //         ex_table_head.appendChild(heading_time);
+    //         ex_table_row_head.appendChild(ex_table_head);
+    //         var ex_table_head1 = document.createElement("th");
+    //         var heading_value = document.createTextNode("Value");
+    //         ex_table_head1.appendChild(heading_value);
+    //         ex_table_row_head.appendChild(ex_table_head1);
+    //         table_h.appendChild(ex_table_row_head);
+    //         ex_table1.appendChild(table_h);
+    //         master_div1.appendChild(ex_table1);
+    //     }
+    //     var text_time = document.createTextNode(t);
+    //     var text_val = document.createTextNode(time_val_arr[i+1]);
+    //     var data_time = document.createElement("td");
+    //     var data_val = document.createElement("td");
+    //     var row = document.createElement("tr");
+    //     data_time.appendChild(text_time);
+    //     row.appendChild(data_time);
+    //     data_val.appendChild(text_val);
+    //     row.appendChild(data_val);
+    //     ex_table1.appendChild(row);
+
+    // }
+
+    // master.appendChild(master_div1);
+
+    // for(q=i;q<(j*2);q=q+2){
+    //     var t = get_new_format2(new Date(time_val_arr[q]*1000));
+    //     var s = String(t);
+    //     var d2 = s[8]+s[9];
+    //     if(d1 != d2 || q ==i){
+    //         if(d1 != d2){
+    //             d1 = d2;
+    //         }
+
+    //         var ex_table1 = document.createElement("Table");
+    //         ex_table1.setAttribute("class", "table2");
+    //         var table_h = document.createElement("thead");
+    //         var ex_table_row_head = document.createElement("tr");
+    //         var ex_table_head = document.createElement("th");
+    //         var heading_time = document.createTextNode("Time");
+    //         ex_table_head.appendChild(heading_time);
+    //         ex_table_row_head.appendChild(ex_table_head);
+    //         var ex_table_head1 = document.createElement("th");
+    //         var heading_value = document.createTextNode("Value");
+    //         ex_table_head1.appendChild(heading_value);
+    //         ex_table_row_head.appendChild(ex_table_head1);
+    //         table_h.appendChild(ex_table_row_head);
+    //         ex_table1.appendChild(table_h);
+    //         master_div2.appendChild(ex_table1);
+    //     }
+    //     var text_time = document.createTextNode(t);
+    //     var text_val = document.createTextNode(time_val_arr[q+1]);
+    //     var data_time = document.createElement("td");
+    //     var data_val = document.createElement("td");
+    //     var row = document.createElement("tr");
+    //     data_time.appendChild(text_time);
+    //     row.appendChild(data_time);
+    //     data_val.appendChild(text_val);
+    //     row.appendChild(data_val);
+    //     ex_table1.appendChild(row);
+    // }
+    // master.appendChild(master_div2);
+    // for(f=q;f<total;f=f+2){
+    //     var t = get_new_format2(new Date(time_val_arr[f]*1000));
+    //     var s = String(t);
+    //     var d2 = s[8]+s[9];
+    //     if(d1 != d2 || f ==q){
+    //         if(d1 != d2){
+    //             d1 = d2;
+    //         }
+    //         var ex_table1 = document.createElement("Table");
+    //         ex_table1.setAttribute("class", "table2");
+    //         var table_h = document.createElement("thead");
+    //         var ex_table_row_head = document.createElement("tr");
+    //         var ex_table_head = document.createElement("th");
+    //         var heading_time = document.createTextNode("Time");
+    //         ex_table_head.appendChild(heading_time);
+    //         ex_table_row_head.appendChild(ex_table_head);
+    //         var ex_table_head1 = document.createElement("th");
+    //         var heading_value = document.createTextNode("Value");
+    //         ex_table_head1.appendChild(heading_value);
+    //         ex_table_row_head.appendChild(ex_table_head1);
+    //         table_h.appendChild(ex_table_row_head);
+    //         ex_table1.appendChild(table_h);
+    //         master_div3.appendChild(ex_table1);
+    //     }
+    //     var text_time = document.createTextNode(t);
+    //     var text_val = document.createTextNode(time_val_arr[f+1]);
+    //     var data_time = document.createElement("td");
+    //     var data_val = document.createElement("td");
+    //     var row = document.createElement("tr");
+    //     data_time.appendChild(text_time);
+    //     row.appendChild(data_time);
+    //     data_val.appendChild(text_val);
+    //     row.appendChild(data_val);
+    //     ex_table1.appendChild(row);
+    // }
+    // master.appendChild(master_div3);
+
+    // main.appendChild(master);
+    // document.getElementById("expanded_table").appendChild(main);
 
 
 

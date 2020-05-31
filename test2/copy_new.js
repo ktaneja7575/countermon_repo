@@ -701,7 +701,11 @@ function show_exp_data(){
 
     var size = final_arr.length/2;
     var s1 = parseInt(size/3);
+    if(size%3 != 0){
+        s1 = s1 + 1;
+    }
     var s2 = s1*2;
+
     var c=1;
     for(var j=0; j<final_arr.length; j=j+2){
         var row = document.createElement("tr");
@@ -806,6 +810,9 @@ function print_data(){
 
     var size = final_arr.length/2;
     var s1 = parseInt(size/3);
+    if(size%3 != 0){
+        s1 = s1 + 1;
+    }
     var s2 = s1*2;
     var c=1;
     for(var j=0; j<final_arr.length; j=j+2){
@@ -850,7 +857,7 @@ function expanded_data()
     var toatalhit = JSON.parse(localStorage.getItem('hit_value'));
     var arr_for_time = JSON.parse(sessionStorage.getItem('time_hash'));
     // console.log(typeof(hash_for_time));
-
+// document.write(arr_for_time);
 
     console.log(arr_for_time.length);
     var d1 =0;

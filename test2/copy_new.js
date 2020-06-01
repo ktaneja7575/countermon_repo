@@ -2,6 +2,7 @@ var final_hash = {};
 var comp_hash = {};
 var hash_thres = {};
 var hash_interv = {};
+
 // var tex;
 // var counter_val, instance_val;
 function gmt_date(gmt) {
@@ -425,7 +426,7 @@ function getvalue_func(counters_from_ajax, data) {
     //     }
     // }
     // console.log(counters.length);
-    var files_array = [];
+    var files_array = new Array();
     var pre_epoch = epoch1 - 14400;
     var pre_date = new Date(pre_epoch * 1000);
     var pre_gmt_time = pre_date.toUTCString();
@@ -866,8 +867,19 @@ function expanded_data()
     {
         var d2 = get_new_format3(new Date(arr_for_time[i]*1000));
         if(d2 != d1){
-            dates.push(d2);
-            d1 = d2;
+            var f =0;
+            for(var k=0; k<dates.length; k++)
+            {
+                if(d2 == dates[k]){
+                    f=1;
+                }
+            }
+            if(f == 0){
+                dates.push(d2);
+                d1 = d2;
+            }
+
+            // alert(arr_for_time[i]);
         }
     }
     console.log(dates.length);

@@ -250,9 +250,9 @@ function cloud(row_col)
    var th = arr[2];
    var inte = arr[3];
    var hit = arr[4];
-   alert(row_col);
-   alert(inst);
-   alert(coun);
+//    alert(row_col);
+//    alert(inst);
+//    alert(coun);
     localStorage.setItem('inst_name', JSON.stringify(inst));
     localStorage.setItem('coun_name', JSON.stringify(coun));
     localStorage.setItem('thres_value', JSON.stringify(th));

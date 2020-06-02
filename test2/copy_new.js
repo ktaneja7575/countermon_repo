@@ -197,11 +197,12 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 // function Data_for_last_cron(data) {
 //     document.getElementById("demo").innerHTML = "now u can analyse data till last crone time";
 // }
+var q;
 function fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1, e2) {
 
-
-
-    let data_file = fetch(file_getter);
+   var len = file_getter.length;
+   if(q<len){
+    let data_file = fetch(file_getter[q]);
     Promise.all([data_file])
         .then(files => {
             files.forEach(file => {
@@ -209,14 +210,18 @@ function fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1,
             })
         })
         .catch(err => {
-        });
+            return 0;
+                });
     let process = (prom) => {
         prom.then(data => {
+            alert(file_getter[q]);
             traverse_data_for_one_file(regex, counters, data, t1, t2);
-
+            fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1, e2);
+            q++;
             show_table(counters, e1, e2);
         })
     }
+}
 
     //fetch(file)
     //  .then(function (resp) {
@@ -236,11 +241,11 @@ function fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1,
     //});
 }
 
-function traverse_files(regex, counters, files_array, t1, t2, e1, e2) {
-    for (var i = 0; i < files_array.length; i++) {
-        fetch_data_between_time_range(regex, counters, files_array[i], t1, t2,e1,e2);
-    }
-}
+// function traverse_files(regex, counters, files_array, t1, t2, e1, e2) {
+//     for (var i = 0; i < files_array.length; i++) {
+//         fetch_data_between_time_range(regex, counters, files_array[i], t1, t2,e1,e2);
+//     }
+// }
 function cloud(row_col)
 {
     
@@ -495,7 +500,7 @@ function getvalue_func(counters_from_ajax, data) {
                 for (var num = 1; num <= 6; num++) {
                     files_array.push(log_folder + num + '.json');
                 }
-                traverse_files(regex, counters, files_array, t1, t2, epoch1, last_cron_epoch);
+                fetch_data_between_time_range(regex, counters, files_array, t1, t2, epoch1, last_cron_epoch);
                 console.log(files_array);
             }
             else {
@@ -525,7 +530,7 @@ function getvalue_func(counters_from_ajax, data) {
                     }
                 }
                 console.log(files_array);
-                traverse_files(regex, counters, files_array, t1, t2, epoch1, last_cron_epoch);
+                fetch_data_between_time_range(regex, counters, files_array, t1, t2, epoch1, last_cron_epoch);
             }
             console.log("Please enter correct range");
             var temp_div = document.createElement("div");
@@ -547,7 +552,7 @@ function getvalue_func(counters_from_ajax, data) {
                 for (var num = 1; num <= 6; num++) {
                     files_array.push(log_folder + num + '.json');
                 }
-                traverse_files(regex, counters, files_array, t1, t2, epoch1, epoch2);
+                fetch_data_between_time_range(regex, counters, files_array, t1, t2, epoch1, epoch2);
                 console.log(files_array);
             }
             else {
@@ -577,7 +582,7 @@ function getvalue_func(counters_from_ajax, data) {
                     }
                 }
                 console.log(files_array);
-                traverse_files(regex, counters, files_array, t1, t2, epoch1, epoch2);
+                fetch_data_between_time_range(regex, counters, files_array, t1, t2, epoch1, epoch2);
             }
             // console.log("Please enter correct range");
             // var temp_div = document.createElement("div");
@@ -594,6 +599,7 @@ function getvalue_func(counters_from_ajax, data) {
 
 
 function get_gmt_data(counters_from_ajax) {
+    q=0;
     gmt_file = "./timestamp";
     let data_file = fetch(gmt_file);
     // alert(data_file);

@@ -208,6 +208,7 @@ var flagger=0;
 	    flagger=1;
 	fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1, e2);
          q++;
+         show_table(counters, e1, e2);
 }
 })
 	if(flagger == 0)
@@ -656,88 +657,88 @@ function show_exp_data(){
     var master_div = document.createElement("div");
     master_div.setAttribute("id", "master");
 
-    var div1 = document.createElement("div");
-    div1.setAttribute("class", "div_class");    
-    var table1 = document.createElement("table");
-    table1.setAttribute("class", "table");
-    var t_h1 = document.createElement("thead");
-    var r1 = document.createElement("tr");
-    var h_time1 = document.createElement("th");
-    var h_t1 = document.createTextNode("Time");
-    h_time1.appendChild(h_t1);
-    var h_value1 = document.createElement("th");
-    var h_v1 = document.createTextNode("Value");
-    h_value1.appendChild(h_v1);
-    r1.appendChild(h_time1);
-    r1.appendChild(h_value1);
-    t_h1.appendChild(r1);
-    table1.appendChild(t_h1);
-    div1.appendChild(table1);
-    master_div.appendChild(div1);
+//     var div1 = document.createElement("div");
+//     div1.setAttribute("class", "div_class");    
+//     var table1 = document.createElement("table");
+//     table1.setAttribute("class", "table");
+//     var t_h1 = document.createElement("thead");
+//     var r1 = document.createElement("tr");
+//     var h_time1 = document.createElement("th");
+//     var h_t1 = document.createTextNode("Time");
+//     h_time1.appendChild(h_t1);
+//     var h_value1 = document.createElement("th");
+//     var h_v1 = document.createTextNode("Value");
+//     h_value1.appendChild(h_v1);
+//     r1.appendChild(h_time1);
+//     r1.appendChild(h_value1);
+//     t_h1.appendChild(r1);
+//     table1.appendChild(t_h1);
+//     div1.appendChild(table1);
+//     master_div.appendChild(div1);
 
 
-if(final_arr.length>2)
-{
-    var div2 = document.createElement("div");
-    div2.setAttribute("class", "div_class");    
-    var table2 = document.createElement("table");
-    table2.setAttribute("class", "table");
-    var t_h2 = document.createElement("thead");
-    var r2 = document.createElement("tr");
-    var h_time2 = document.createElement("th");
-    var h_t2 = document.createTextNode("Time");
-    h_time2.appendChild(h_t2);
-    var h_value2 = document.createElement("th");
-    var h_v2 = document.createTextNode("Value");
-    h_value2.appendChild(h_v2);
-    r2.appendChild(h_time2);
-    r2.appendChild(h_value2);
-    t_h2.appendChild(r2);
-    table2.appendChild(t_h2);
-    div2.appendChild(table2);
-    master_div.appendChild(div2);
-}
+// if(final_arr.length>2)
+// {
+//     var div2 = document.createElement("div");
+//     div2.setAttribute("class", "div_class");    
+//     var table2 = document.createElement("table");
+//     table2.setAttribute("class", "table");
+//     var t_h2 = document.createElement("thead");
+//     var r2 = document.createElement("tr");
+//     var h_time2 = document.createElement("th");
+//     var h_t2 = document.createTextNode("Time");
+//     h_time2.appendChild(h_t2);
+//     var h_value2 = document.createElement("th");
+//     var h_v2 = document.createTextNode("Value");
+//     h_value2.appendChild(h_v2);
+//     r2.appendChild(h_time2);
+//     r2.appendChild(h_value2);
+//     t_h2.appendChild(r2);
+//     table2.appendChild(t_h2);
+//     div2.appendChild(table2);
+//     master_div.appendChild(div2);
+// }
 
-if(final_arr.length > 4){
-    var div3 = document.createElement("div");
-    div3.setAttribute("class", "div_class");    
-    var table3 = document.createElement("table");
-    table3.setAttribute("class", "table");
-    var t_h3 = document.createElement("thead");
-    var r3 = document.createElement("tr");
-    var h_time3 = document.createElement("th");
-    var h_t3 = document.createTextNode("Time");
-    h_time3.appendChild(h_t3);
-    var h_value3 = document.createElement("th");
-    var h_v3 = document.createTextNode("Value");
-    h_value3.appendChild(h_v3);
-    r3.appendChild(h_time3);
-    r3.appendChild(h_value3);
-    t_h3.appendChild(r3);
-    table3.appendChild(t_h3);
-    div3.appendChild(table3);
-    master_div.appendChild(div3);
-}
-if(final_arr.length > 12){
-    var div4 = document.createElement("div");
-    div4.setAttribute("class", "div_class");    
-    var table4 = document.createElement("table");
-    table4.setAttribute("class", "table");
-    var t_h4 = document.createElement("thead");
-    var r4 = document.createElement("tr");
-    var h_time4 = document.createElement("th");
-    var h_t4 = document.createTextNode("Time");
-    h_time4.appendChild(h_t4);
-    var h_value4 = document.createElement("th");
-    var h_v4 = document.createTextNode("Value");
-    h_value4.appendChild(h_v4);
-    r4.appendChild(h_time4);
-    r4.appendChild(h_value4);
-    t_h4.appendChild(r4);
-    table4.appendChild(t_h4);
-    div4.appendChild(table4);
-    master_div.appendChild(div4);
-}
+// if(final_arr.length > 4){
+//     var div3 = document.createElement("div");
+//     div3.setAttribute("class", "div_class");    
+//     var table3 = document.createElement("table");
+//     table3.setAttribute("class", "table");
+//     var t_h3 = document.createElement("thead");
+//     var r3 = document.createElement("tr");
+//     var h_time3 = document.createElement("th");
+//     var h_t3 = document.createTextNode("Time");
+//     h_time3.appendChild(h_t3);
+//     var h_value3 = document.createElement("th");
+//     var h_v3 = document.createTextNode("Value");
+//     h_value3.appendChild(h_v3);
+//     r3.appendChild(h_time3);
+//     r3.appendChild(h_value3);
+//     t_h3.appendChild(r3);
+//     table3.appendChild(t_h3);
+//     div3.appendChild(table3);
+//     master_div.appendChild(div3);
+// }
+// if(final_arr.length > 12){
+//     var div4 = document.createElement("div");
+//     div4.setAttribute("class", "div_class");    
+//     var table4 = document.createElement("table");
+//     table4.setAttribute("class", "table");
+//     var t_h4 = document.createElement("thead");
+//     var r4 = document.createElement("tr");
+//     var h_time4 = document.createElement("th");
+//     var h_t4 = document.createTextNode("Time");
+//     h_time4.appendChild(h_t4);
+//     var h_value4 = document.createElement("th");
+//     var h_v4 = document.createTextNode("Value");
+//     h_value4.appendChild(h_v4);
+//     r4.appendChild(h_time4);
+//     r4.appendChild(h_value4);
+//     t_h4.appendChild(r4);
+//     table4.appendChild(t_h4);
+//     div4.appendChild(table4);
+//     master_div.appendChild(div4);
+// }
 
 
 var size = final_arr.length/2;
@@ -748,6 +749,10 @@ if(size%4 != 0){
 var s2 = s1*2;
 var s3 = s1*3;
 var c=1;
+var f1=0;
+var f2=0;
+var f3=0;
+var f4=0;
 for(var j=0; j<final_arr.length; j=j+2){
     var row = document.createElement("tr");
     var data1 = document.createElement("td");
@@ -760,28 +765,118 @@ for(var j=0; j<final_arr.length; j=j+2){
     row.appendChild(data2);
     if(c<=s1)
     {
+        if(f1 == 0)
+        {
+            var div1 = document.createElement("div");
+            div1.setAttribute("class", "div_class");    
+            var table1 = document.createElement("table");
+            table1.setAttribute("class", "table");
+            var t_h1 = document.createElement("thead");
+            var r1 = document.createElement("tr");
+            var h_time1 = document.createElement("th");
+            var h_t1 = document.createTextNode("Time");
+            h_time1.appendChild(h_t1);
+            var h_value1 = document.createElement("th");
+            var h_v1 = document.createTextNode("Value");
+            h_value1.appendChild(h_v1);
+            r1.appendChild(h_time1);
+            r1.appendChild(h_value1);
+            t_h1.appendChild(r1);
+            table1.appendChild(t_h1);
+            div1.appendChild(table1);
+            master_div.appendChild(div1);
+            f1++;
+        }
+
         table1.appendChild(row);
     }
     else if(c<=s2)
     {
+        if(f2 == 0)
+        {
+            var div2 = document.createElement("div");
+            div2.setAttribute("class", "div_class");    
+            var table2 = document.createElement("table");
+            table2.setAttribute("class", "table");
+            var t_h2 = document.createElement("thead");
+            var r2 = document.createElement("tr");
+            var h_time2 = document.createElement("th");
+            var h_t2 = document.createTextNode("Time");
+            h_time2.appendChild(h_t2);
+            var h_value2 = document.createElement("th");
+            var h_v2 = document.createTextNode("Value");
+            h_value2.appendChild(h_v2);
+            r2.appendChild(h_time2);
+            r2.appendChild(h_value2);
+            t_h2.appendChild(r2);
+            table2.appendChild(t_h2);
+            div2.appendChild(table2);
+            master_div.appendChild(div2);
+            f2++;
+        }
         table2.appendChild(row);
     }
     else if(c<=s3)
     {
+        if(f3 == 0)
+        {
+            var div3 = document.createElement("div");
+            div3.setAttribute("class", "div_class");    
+            var table3 = document.createElement("table");
+            table3.setAttribute("class", "table");
+            var t_h3 = document.createElement("thead");
+            var r3 = document.createElement("tr");
+            var h_time3 = document.createElement("th");
+            var h_t3 = document.createTextNode("Time");
+            h_time3.appendChild(h_t3);
+            var h_value3 = document.createElement("th");
+            var h_v3 = document.createTextNode("Value");
+            h_value3.appendChild(h_v3);
+            r3.appendChild(h_time3);
+            r3.appendChild(h_value3);
+            t_h3.appendChild(r3);
+            table3.appendChild(t_h3);
+            div3.appendChild(table3);
+            master_div.appendChild(div3);
+            f3++;
+        }
         table3.appendChild(row);
     }
     else{
+        if(f4 ==0 )
+        {
+            var div4 = document.createElement("div");
+            div4.setAttribute("class", "div_class");    
+            var table4 = document.createElement("table");
+            table4.setAttribute("class", "table");
+            var t_h4 = document.createElement("thead");
+            var r4 = document.createElement("tr");
+            var h_time4 = document.createElement("th");
+            var h_t4 = document.createTextNode("Time");
+            h_time4.appendChild(h_t4);
+            var h_value4 = document.createElement("th");
+            var h_v4 = document.createTextNode("Value");
+            h_value4.appendChild(h_v4);
+            r4.appendChild(h_time4);
+            r4.appendChild(h_value4);
+            t_h4.appendChild(r4);
+            table4.appendChild(t_h4);
+            div4.appendChild(table4);
+            master_div.appendChild(div4);
+            f4++;
+        }
         table4.appendChild(row);
     }
     c++;
 }
-
-
-
-
    document.getElementById("expanded_table").appendChild(master_div);
 // document.getElementById("expanded_table").innerHTML= final_arr.length;
 }
+
+
+
+
+
 
 
 
@@ -789,93 +884,7 @@ function print_data(){
     var final_arr = JSON.parse(sessionStorage.getItem('time_hash'));
     var master_div = document.createElement("div");
     master_div.setAttribute("id", "master");
-
-    var div1 = document.createElement("div");
-    div1.setAttribute("class", "div_class");    
-    var table1 = document.createElement("table");
-    table1.setAttribute("class", "table");
-    var t_h1 = document.createElement("thead");
-    var r1 = document.createElement("tr");
-    var h_time1 = document.createElement("th");
-    var h_t1 = document.createTextNode("Time");
-    h_time1.appendChild(h_t1);
-    var h_value1 = document.createElement("th");
-    var h_v1 = document.createTextNode("Value");
-    h_value1.appendChild(h_v1);
-    r1.appendChild(h_time1);
-    r1.appendChild(h_value1);
-    t_h1.appendChild(r1);
-    table1.appendChild(t_h1);
-    div1.appendChild(table1);
-    master_div.appendChild(div1);
-
-
-    if(final_arr.length>2)
-    {
-        var div2 = document.createElement("div");
-        div2.setAttribute("class", "div_class");    
-        var table2 = document.createElement("table");
-        table2.setAttribute("class", "table");
-        var t_h2 = document.createElement("thead");
-        var r2 = document.createElement("tr");
-        var h_time2 = document.createElement("th");
-        var h_t2 = document.createTextNode("Time");
-        h_time2.appendChild(h_t2);
-        var h_value2 = document.createElement("th");
-        var h_v2 = document.createTextNode("Value");
-        h_value2.appendChild(h_v2);
-        r2.appendChild(h_time2);
-        r2.appendChild(h_value2);
-        t_h2.appendChild(r2);
-        table2.appendChild(t_h2);
-        div2.appendChild(table2);
-        master_div.appendChild(div2);
-    }
-
-
-
-
-    if(final_arr.length > 4){
-        var div3 = document.createElement("div");
-        div3.setAttribute("class", "div_class");    
-        var table3 = document.createElement("table");
-        table3.setAttribute("class", "table");
-        var t_h3 = document.createElement("thead");
-        var r3 = document.createElement("tr");
-        var h_time3 = document.createElement("th");
-        var h_t3 = document.createTextNode("Time");
-        h_time3.appendChild(h_t3);
-        var h_value3 = document.createElement("th");
-        var h_v3 = document.createTextNode("Value");
-        h_value3.appendChild(h_v3);
-        r3.appendChild(h_time3);
-        r3.appendChild(h_value3);
-        t_h3.appendChild(r3);
-        table3.appendChild(t_h3);
-        div3.appendChild(table3);
-        master_div.appendChild(div3);
-    }
-    if(final_arr.length > 12){
-        var div4 = document.createElement("div");
-        div4.setAttribute("class", "div_class");    
-        var table4 = document.createElement("table");
-        table4.setAttribute("class", "table");
-        var t_h4 = document.createElement("thead");
-        var r4 = document.createElement("tr");
-        var h_time4 = document.createElement("th");
-        var h_t4 = document.createTextNode("Time");
-        h_time4.appendChild(h_t4);
-        var h_value4 = document.createElement("th");
-        var h_v4 = document.createTextNode("Value");
-        h_value4.appendChild(h_v4);
-        r4.appendChild(h_time4);
-        r4.appendChild(h_value4);
-        t_h4.appendChild(r4);
-        table4.appendChild(t_h4);
-        div4.appendChild(table4);
-        master_div.appendChild(div4);
-    }
-
+   
     var size = final_arr.length/2;
     var s1 = parseInt(size/4);
     if(size%4 != 0){
@@ -884,6 +893,10 @@ function print_data(){
     var s2 = s1*2;
     var s3 = s1*3;
     var c=1;
+    var f1=0;
+    var f2=0;
+    var f3=0;
+    var f4=0;
     for(var j=0; j<final_arr.length; j=j+2){
         var row = document.createElement("tr");
         var data1 = document.createElement("td");
@@ -896,17 +909,106 @@ function print_data(){
         row.appendChild(data2);
         if(c<=s1)
         {
+            if(f1 == 0)
+            {
+                var div1 = document.createElement("div");
+                div1.setAttribute("class", "div_class");    
+                var table1 = document.createElement("table");
+                table1.setAttribute("class", "table");
+                var t_h1 = document.createElement("thead");
+                var r1 = document.createElement("tr");
+                var h_time1 = document.createElement("th");
+                var h_t1 = document.createTextNode("Time");
+                h_time1.appendChild(h_t1);
+                var h_value1 = document.createElement("th");
+                var h_v1 = document.createTextNode("Value");
+                h_value1.appendChild(h_v1);
+                r1.appendChild(h_time1);
+                r1.appendChild(h_value1);
+                t_h1.appendChild(r1);
+                table1.appendChild(t_h1);
+                div1.appendChild(table1);
+                master_div.appendChild(div1);
+                f1++;
+            }
+
             table1.appendChild(row);
         }
         else if(c<=s2)
         {
+            if(f2 == 0)
+            {
+                var div2 = document.createElement("div");
+                div2.setAttribute("class", "div_class");    
+                var table2 = document.createElement("table");
+                table2.setAttribute("class", "table");
+                var t_h2 = document.createElement("thead");
+                var r2 = document.createElement("tr");
+                var h_time2 = document.createElement("th");
+                var h_t2 = document.createTextNode("Time");
+                h_time2.appendChild(h_t2);
+                var h_value2 = document.createElement("th");
+                var h_v2 = document.createTextNode("Value");
+                h_value2.appendChild(h_v2);
+                r2.appendChild(h_time2);
+                r2.appendChild(h_value2);
+                t_h2.appendChild(r2);
+                table2.appendChild(t_h2);
+                div2.appendChild(table2);
+                master_div.appendChild(div2);
+                f2++;
+            }
             table2.appendChild(row);
         }
         else if(c<=s3)
         {
+            if(f3 == 0)
+            {
+                var div3 = document.createElement("div");
+                div3.setAttribute("class", "div_class");    
+                var table3 = document.createElement("table");
+                table3.setAttribute("class", "table");
+                var t_h3 = document.createElement("thead");
+                var r3 = document.createElement("tr");
+                var h_time3 = document.createElement("th");
+                var h_t3 = document.createTextNode("Time");
+                h_time3.appendChild(h_t3);
+                var h_value3 = document.createElement("th");
+                var h_v3 = document.createTextNode("Value");
+                h_value3.appendChild(h_v3);
+                r3.appendChild(h_time3);
+                r3.appendChild(h_value3);
+                t_h3.appendChild(r3);
+                table3.appendChild(t_h3);
+                div3.appendChild(table3);
+                master_div.appendChild(div3);
+                f3++;
+            }
             table3.appendChild(row);
         }
         else{
+            if(f4 ==0 )
+            {
+                var div4 = document.createElement("div");
+                div4.setAttribute("class", "div_class");    
+                var table4 = document.createElement("table");
+                table4.setAttribute("class", "table");
+                var t_h4 = document.createElement("thead");
+                var r4 = document.createElement("tr");
+                var h_time4 = document.createElement("th");
+                var h_t4 = document.createTextNode("Time");
+                h_time4.appendChild(h_t4);
+                var h_value4 = document.createElement("th");
+                var h_v4 = document.createTextNode("Value");
+                h_value4.appendChild(h_v4);
+                r4.appendChild(h_time4);
+                r4.appendChild(h_value4);
+                t_h4.appendChild(r4);
+                table4.appendChild(t_h4);
+                div4.appendChild(table4);
+                master_div.appendChild(div4);
+                f4++;
+            }
             table4.appendChild(row);
         }
         c++;

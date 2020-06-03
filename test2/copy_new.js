@@ -698,9 +698,7 @@ if(final_arr.length>2)
     master_div.appendChild(div2);
 }
 
-
-
-if(final_arr.length > 8){
+if(final_arr.length > 4){
     var div3 = document.createElement("div");
     div3.setAttribute("class", "div_class");    
     var table3 = document.createElement("table");
@@ -720,39 +718,63 @@ if(final_arr.length > 8){
     div3.appendChild(table3);
     master_div.appendChild(div3);
 }
+if(final_arr.length > 12){
+    var div4 = document.createElement("div");
+    div4.setAttribute("class", "div_class");    
+    var table4 = document.createElement("table");
+    table4.setAttribute("class", "table");
+    var t_h4 = document.createElement("thead");
+    var r4 = document.createElement("tr");
+    var h_time4 = document.createElement("th");
+    var h_t4 = document.createTextNode("Time");
+    h_time4.appendChild(h_t4);
+    var h_value4 = document.createElement("th");
+    var h_v4 = document.createTextNode("Value");
+    h_value4.appendChild(h_v4);
+    r4.appendChild(h_time4);
+    r4.appendChild(h_value4);
+    t_h4.appendChild(r4);
+    table4.appendChild(t_h4);
+    div4.appendChild(table4);
+    master_div.appendChild(div4);
+}
 
-    var size = final_arr.length/2;
-    var s1 = parseInt(size/3);
-    if(size%3 != 0){
-        s1 = s1 + 1;
-    }
-    var s2 = s1*2;
 
-    var c=1;
-    for(var j=0; j<final_arr.length; j=j+2){
-        var row = document.createElement("tr");
-        var data1 = document.createElement("td");
-        var time = document.createTextNode(get_new_format2(new Date(final_arr[j]*1000)));
-        data1.appendChild(time);
-        var data2 = document.createElement("td");
-        var val = document.createTextNode(final_arr[j+1]);
-        data2.appendChild(val);
-        row.appendChild(data1);
-        row.appendChild(data2);
-        if(c<=s1)
-        {
-            table1.appendChild(row);
-        }
-        else if(c<=s2)
-        {
-            table2.appendChild(row);
-        }
-        else
-        {
-            table3.appendChild(row);
-        }
-        c++;
+var size = final_arr.length/2;
+var s1 = parseInt(size/4);
+if(size%4 != 0){
+    s1 = s1 + 1;
+}
+var s2 = s1*2;
+var s3 = s1*3;
+var c=1;
+for(var j=0; j<final_arr.length; j=j+2){
+    var row = document.createElement("tr");
+    var data1 = document.createElement("td");
+    var time = document.createTextNode(get_new_format2(new Date(final_arr[j]*1000)));
+    data1.appendChild(time);
+    var data2 = document.createElement("td");
+    var val = document.createTextNode(final_arr[j+1]);
+    data2.appendChild(val);
+    row.appendChild(data1);
+    row.appendChild(data2);
+    if(c<=s1)
+    {
+        table1.appendChild(row);
     }
+    else if(c<=s2)
+    {
+        table2.appendChild(row);
+    }
+    else if(c<=s3)
+    {
+        table3.appendChild(row);
+    }
+    else{
+        table4.appendChild(row);
+    }
+    c++;
+}
 
 
 
@@ -813,7 +835,7 @@ function print_data(){
 
 
 
-    if(final_arr.length > 8){
+    if(final_arr.length > 4){
         var div3 = document.createElement("div");
         div3.setAttribute("class", "div_class");    
         var table3 = document.createElement("table");
@@ -833,13 +855,34 @@ function print_data(){
         div3.appendChild(table3);
         master_div.appendChild(div3);
     }
+    if(final_arr.length > 12){
+        var div4 = document.createElement("div");
+        div4.setAttribute("class", "div_class");    
+        var table4 = document.createElement("table");
+        table4.setAttribute("class", "table");
+        var t_h4 = document.createElement("thead");
+        var r4 = document.createElement("tr");
+        var h_time4 = document.createElement("th");
+        var h_t4 = document.createTextNode("Time");
+        h_time4.appendChild(h_t4);
+        var h_value4 = document.createElement("th");
+        var h_v4 = document.createTextNode("Value");
+        h_value4.appendChild(h_v4);
+        r4.appendChild(h_time4);
+        r4.appendChild(h_value4);
+        t_h4.appendChild(r4);
+        table4.appendChild(t_h4);
+        div4.appendChild(table4);
+        master_div.appendChild(div4);
+    }
 
     var size = final_arr.length/2;
-    var s1 = parseInt(size/3);
-    if(size%3 != 0){
+    var s1 = parseInt(size/4);
+    if(size%4 != 0){
         s1 = s1 + 1;
     }
     var s2 = s1*2;
+    var s3 = s1*3;
     var c=1;
     for(var j=0; j<final_arr.length; j=j+2){
         var row = document.createElement("tr");
@@ -859,9 +902,12 @@ function print_data(){
         {
             table2.appendChild(row);
         }
-        else
+        else if(c<=s3)
         {
             table3.appendChild(row);
+        }
+        else{
+            table4.appendChild(row);
         }
         c++;
     }

@@ -12,12 +12,13 @@
 	margin-right: auto;
 }
 #master{
-	margin-left: 8%;
-	/* margin-right: auto; */
+	margin-left: auto;
+ margin-right: auto;
+	width:90%;
 }
 .div_class{
 	float: left;
-	/* width: 33%; */
+	width: 33%;
 	padding: 20px;
 }
 /* .parent_div {

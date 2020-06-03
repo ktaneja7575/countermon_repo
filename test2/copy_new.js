@@ -676,7 +676,8 @@ function show_exp_data(){
     master_div.appendChild(div1);
 
 
-
+if(final_arr.length>2)
+{
     var div2 = document.createElement("div");
     div2.setAttribute("class", "div_class");    
     var table2 = document.createElement("table");
@@ -695,10 +696,11 @@ function show_exp_data(){
     table2.appendChild(t_h2);
     div2.appendChild(table2);
     master_div.appendChild(div2);
+}
 
 
 
-
+if(final_arr.length > 8){
     var div3 = document.createElement("div");
     div3.setAttribute("class", "div_class");    
     var table3 = document.createElement("table");
@@ -717,6 +719,7 @@ function show_exp_data(){
     table3.appendChild(t_h3);
     div3.appendChild(table3);
     master_div.appendChild(div3);
+}
 
     var size = final_arr.length/2;
     var s1 = parseInt(size/3);
@@ -785,47 +788,51 @@ function print_data(){
     master_div.appendChild(div1);
 
 
+    if(final_arr.length>2)
+    {
+        var div2 = document.createElement("div");
+        div2.setAttribute("class", "div_class");    
+        var table2 = document.createElement("table");
+        table2.setAttribute("class", "table");
+        var t_h2 = document.createElement("thead");
+        var r2 = document.createElement("tr");
+        var h_time2 = document.createElement("th");
+        var h_t2 = document.createTextNode("Time");
+        h_time2.appendChild(h_t2);
+        var h_value2 = document.createElement("th");
+        var h_v2 = document.createTextNode("Value");
+        h_value2.appendChild(h_v2);
+        r2.appendChild(h_time2);
+        r2.appendChild(h_value2);
+        t_h2.appendChild(r2);
+        table2.appendChild(t_h2);
+        div2.appendChild(table2);
+        master_div.appendChild(div2);
+    }
 
-    var div2 = document.createElement("div");
-    div2.setAttribute("class", "div_class");    
-    var table2 = document.createElement("table");
-    table2.setAttribute("class", "table");
-    var t_h2 = document.createElement("thead");
-    var r2 = document.createElement("tr");
-    var h_time2 = document.createElement("th");
-    var h_t2 = document.createTextNode("Time");
-    h_time2.appendChild(h_t2);
-    var h_value2 = document.createElement("th");
-    var h_v2 = document.createTextNode("Value");
-    h_value2.appendChild(h_v2);
-    r2.appendChild(h_time2);
-    r2.appendChild(h_value2);
-    t_h2.appendChild(r2);
-    table2.appendChild(t_h2);
-    div2.appendChild(table2);
-    master_div.appendChild(div2);
 
 
 
-
-    var div3 = document.createElement("div");
-    div3.setAttribute("class", "div_class");    
-    var table3 = document.createElement("table");
-    table3.setAttribute("class", "table");
-    var t_h3 = document.createElement("thead");
-    var r3 = document.createElement("tr");
-    var h_time3 = document.createElement("th");
-    var h_t3 = document.createTextNode("Time");
-    h_time3.appendChild(h_t3);
-    var h_value3 = document.createElement("th");
-    var h_v3 = document.createTextNode("Value");
-    h_value3.appendChild(h_v3);
-    r3.appendChild(h_time3);
-    r3.appendChild(h_value3);
-    t_h3.appendChild(r3);
-    table3.appendChild(t_h3);
-    div3.appendChild(table3);
-    master_div.appendChild(div3);
+    if(final_arr.length > 8){
+        var div3 = document.createElement("div");
+        div3.setAttribute("class", "div_class");    
+        var table3 = document.createElement("table");
+        table3.setAttribute("class", "table");
+        var t_h3 = document.createElement("thead");
+        var r3 = document.createElement("tr");
+        var h_time3 = document.createElement("th");
+        var h_t3 = document.createTextNode("Time");
+        h_time3.appendChild(h_t3);
+        var h_value3 = document.createElement("th");
+        var h_v3 = document.createTextNode("Value");
+        h_value3.appendChild(h_v3);
+        r3.appendChild(h_time3);
+        r3.appendChild(h_value3);
+        t_h3.appendChild(r3);
+        table3.appendChild(t_h3);
+        div3.appendChild(table3);
+        master_div.appendChild(div3);
+    }
 
     var size = final_arr.length/2;
     var s1 = parseInt(size/3);

@@ -199,29 +199,41 @@ function traverse_data_for_one_file(regex, counters, data, t1, t2) {
 // }
 var q;
 function fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1, e2) {
-
+var flagger=0;
    var len = file_getter.length;
    if(q<len){
+	   fetch(file_getter[q])
+  .then(function (resp) {
+    if (resp.status === 404) {
+	    flagger=1;
+	fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1, e2);
+         q++;
+}
+})
+	if(flagger == 0)
+	   {
     let data_file = fetch(file_getter[q]);
     Promise.all([data_file])
         .then(files => {
             files.forEach(file => {
                 process(file.json());
+	    
             })
         })
         .catch(err => {
-            return 0;
+
                 });
     let process = (prom) => {
         prom.then(data => {
-            alert(file_getter[q]);
             traverse_data_for_one_file(regex, counters, data, t1, t2);
             fetch_data_between_time_range(regex, counters, file_getter, t1, t2, e1, e2);
             q++;
             show_table(counters, e1, e2);
         })
     }
+	   }
 }
+
 
     //fetch(file)
     //  .then(function (resp) {
